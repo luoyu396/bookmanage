@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.book.bookmanage.business.impl.UserDaoImpl">
+	
+	<!-- 查询列 -->
+	<sql id="selectUserColunm">
+		select t.user_id as userId,
+			 t.login_name as loginName,
+			 t.user_name as userName ,
+			 t.user_type as userType,
+			 t.password ,
+			 t.telphone,
+			 t.email,
+			 t.address ,
+			 t.create_time as createTime,
+			 t.remark
+	</sql>
+
+	<!-- 添加用户 -->
+	<insert id="insert" parameterType="User">
+		insert into BT_T_USER (user_id,
+				login_name,
+				user_name,
+				user_type,
+				password,
+				telphone,
+				email,
+				address,
+				createTime,
+				remark)
+		values (#{userId,jdbcType=VARCHAR},
+				#{loginName,jdbcType=VARCHAR},
+				#{userName,jdbcType=VARCHAR},
+				#{userType,jdbcType=VARCHAR},
+				#{password,jdbcType=VARCHAR},
+				#{telphone,jdbcType=VARCHAR},
+				#{email,jdbcType=VARCHAR},
+				#{address,jdbcType=VARCHAR},
+				#{createTime,jdbcType=DATE},
+				#{remark,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 删除用户-->
+	<delete id="delete" parameterType="String">
+		delete from BT_T_USER where user_id=#{_parameter}
+	</delete>
+
+	<!-- 更新用户 -->
+	<update id="update" parameterType="User">
+		update BT_T_USER t
+		set t.login_name=#{loginName,jdbcType=VARCHAR},
+			t.user_name=#{userName,jdbcType=VARCHAR},
+			t.phone=#{phone,jdbcType=VARCHAR},
+			t.telphone=#{telphone,jdbcType=VARCHAR},
+			t.email=#{email,jdbcType=VARCHAR},
+			t.address=#{address,jdbcType=VARCHAR},
+			t.remark=#{remark,jdbcType=VARCHAR}
+		where t.user_id=#{userId}
+	</update>
+
+	<!-- 根据user_id查询用户-->
+	<select id="selectOne" parameterType="String" resultType="User">
+		<include refid="selectUserColunm"></include>
+		from BT_T_USER t
+		where t.user_id=#{_parameter}
+	</select>
+
+	<!-- 查询用户集合 -->
+	<select id="selectList" parameterType="User" resultType="User">
+		<include refid="selectUserColunm"></include>
+		from BT_T_USER t
+		<where>
+			<if test="userId != null and userId !=''">
+				and t.user_id = #{userId}
+			</if>
+			<if test="login_name != null and login_name !=''">
+				and t.login_name = #{loginName}
+			</if>
+			<if test="userName != null and userName !=''">
+				and t.user_name = #{userName}
+			</if>
+			<if test="telphone != null and telphone !=''">
+				and instr(t.telphone,#{telphone}) >0
+			</if>
+			<if test="email != null and email !=''">
+				and instr(t.email,#{email}) >0
+			</if>
+			<if test="address != null and address !=''">
+				and instr(t.address, #{address}) >0
+			</if>
+		</where>
+	</select>
+	
+</mapper>
