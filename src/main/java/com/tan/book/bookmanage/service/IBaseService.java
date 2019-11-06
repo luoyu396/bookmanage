@@ -3,9 +3,8 @@ package com.tan.book.bookmanage.service;
 import java.util.List;
 
 /**
- * @Author tanbb
- * @Description 基础服务接口
- * @Version 1.0
+ * 基础服务接口
+ * @author tanbb
  **/
 public interface IBaseService {
     /**

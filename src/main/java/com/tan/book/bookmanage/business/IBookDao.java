@@ -3,9 +3,10 @@ package com.tan.book.bookmanage.business;
 import com.tan.book.bookmanage.dao.IBaseDao;
 
 /**
- * 用户数据接口
+ * 图书信息数据服务接口
  * @author tanbb
- **/
-public interface IUserDao extends IBaseDao {
+ * @create 2019-11-06 17:24
+ */
+public interface IBookDao extends IBaseDao {
 
 }

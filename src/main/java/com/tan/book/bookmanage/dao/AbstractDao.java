@@ -8,9 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @Author tanbb
- * @Description
- * @Version 1.0
+ * 数据接口抽象实现类
+ * @author tanbb
  **/
 public abstract class AbstractDao implements IBaseDao {
     @Autowired

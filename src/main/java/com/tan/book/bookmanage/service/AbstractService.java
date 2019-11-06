@@ -5,9 +5,8 @@ import com.tan.book.bookmanage.dao.IBaseDao;
 import java.util.List;
 
 /**
- * @Author tanbb
- * @Description
- * @Version 1.0
+ * 服务接口抽象实现类
+ * @author tanbb
  **/
 public abstract class AbstractService implements IBaseService {
     public IBaseDao baseDao;

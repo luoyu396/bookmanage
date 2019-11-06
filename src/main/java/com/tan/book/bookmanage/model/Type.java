@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * 图书分类表
  * @author tanbb
- * @description 图书分类表
  */
 public class Type implements Serializable {
 

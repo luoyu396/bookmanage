@@ -1,9 +1,8 @@
 package com.tan.book.bookmanage.web;
 
 /**
- * @Author tanbb
- * @Description 基础控制器接口
- * @Version 1.0
+ * 基础控制器接口
+ * @author tanbb
  **/
  interface IBaseController<T> {
 

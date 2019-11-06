@@ -6,9 +6,8 @@ import com.tan.book.bookmanage.service.IBaseService;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @Author tanbb
- * @Description 基础控制器接口实现
- * @Version 1.0
+ * 基础控制器接口抽象实现类
+ * @author tanbb
  **/
 public abstract class AbstractController<T> implements IBaseController<T>{
     public IBaseService baseService;

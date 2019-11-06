@@ -4,9 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Author tanbb
- * @Description 用户表
- * @Version 1.0
+ * 用户表
+ * @author tanbb
  **/
 public class User implements Serializable {
 

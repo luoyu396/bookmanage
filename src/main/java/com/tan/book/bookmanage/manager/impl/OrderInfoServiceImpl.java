@@ -1,8 +1,8 @@
 package com.tan.book.bookmanage.manager.impl;
 
-import com.tan.book.bookmanage.business.IUserDao;
+import com.tan.book.bookmanage.business.IOrderInfoDao;
 import com.tan.book.bookmanage.dao.IBaseDao;
-import com.tan.book.bookmanage.manager.IUserService;
+import com.tan.book.bookmanage.manager.IOrderInfoService;
 import com.tan.book.bookmanage.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,20 +11,21 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 /**
- * 用户服务接口实现
+ * 订单服务接口明细
  * @author tanbb
- **/
-@Service("userService")
+ * @create 2019-11-06 19:41
+ */
+@Service("orderInfoService")
 @Transactional
-public class UserServiceImpl extends AbstractService implements IUserService {
+public class OrderInfoServiceImpl extends AbstractService implements IOrderInfoService {
 
-    @Resource(name="userDao")
+    @Resource(name="orderInfoDao")
     public void setBaseDao(IBaseDao baseDao) {
         super.baseDao = baseDao;
     }
 
     @Autowired
-    private IUserDao userDao;
+    private IOrderInfoDao orderInfoDao;
 
 
 }
