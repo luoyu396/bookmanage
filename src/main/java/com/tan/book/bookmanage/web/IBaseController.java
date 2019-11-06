@@ -1,5 +1,7 @@
 package com.tan.book.bookmanage.web;
 
+import com.tan.book.bookmanage.model.AjaxResult;
+
 /**
  * 基础控制器接口
  * @author tanbb
@@ -18,23 +20,23 @@ package com.tan.book.bookmanage.web;
      * @Author tanbb
      * @Description 查询列表
      * @Param []
-     * @return java.lang.String
+     * @return AjaxResult
      **/
-     String queryList();
+    AjaxResult queryList();
 
     /**
      * @Author tanbb
      * @Description 根据页数和记录数查询分页数据
      * @Param [page, rows] 页数和记录数
-     * @return java.lang.String
+     * @return AjaxResult
      **/
-     String queryListPage(int page, int rows);
+    AjaxResult queryListPage(int page, int rows);
 
     /**
      * @Author tanbb
      * @Description 根据页数和记录数查询分页数据
      * @Param [page, rows] 页数和记录数
-     * @return java.lang.String
+     * @return AjaxResult
      **/
-     String queryListPage2(int page, int rows, T params);
+    AjaxResult queryListPage2(int page, int rows, T params);
 }
