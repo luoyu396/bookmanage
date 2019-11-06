@@ -16,7 +16,7 @@ public class OrderInfo implements Serializable {
     private String orderStatus;
 
     //合计金额
-    private double totalMoney;
+    private Double totalMoney;
 
     //收货地址
     private String address;
@@ -43,11 +43,11 @@ public class OrderInfo implements Serializable {
         this.orderStatus = orderStatus;
     }
 
-    public double getTotalMoney() {
+    public Double getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(double totalMoney) {
+    public void setTotalMoney(Double totalMoney) {
         this.totalMoney = totalMoney;
     }
 

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.book.bookmanage.business.impl.OrderInfoDaoImpl">
+
+    <!-- 查询列 -->
+    <sql id="selectOrderInfoColunm">
+		select t.order_id as orderId,
+			 t.order_status as orderStatus,
+			 t.total_money as totalMoney,
+			 t.address,
+			 t.user_id as userId,
+			 t.create_time as createTime
+	</sql>
+
+    <!-- 添加订单 -->
+    <insert id="insert" parameterType="OrderInfo">
+		insert into BT_T_ORDER (order_id,
+				order_status,
+				total_money,
+				address,
+				user_id,
+				create_time)
+		values (#{orderId,jdbcType=VARCHAR},
+				#{orderStatus,jdbcType=VARCHAR},
+				#{totalMoney,jdbcType=DOUBLE},
+				#{address,jdbcType=VARCHAR},
+				#{userId,jdbcType=VARCHAR},
+				#{createTime,jdbcType=DATE})
+	</insert>
+
+    <!-- 删除订单-->
+    <delete id="delete" parameterType="String">
+		delete from BT_T_ORDER where order_id=#{_parameter}
+	</delete>
+
+    <!-- 更新订单 -->
+    <update id="update" parameterType="OrderInfo">
+		update BT_T_ORDER t
+		set t.order_status=#{orderStatus,jdbcType=VARCHAR},
+			t.total_money=#{totalMoney,jdbcType=DOUBLE},
+			t.address=#{address,jdbcType=VARCHAR},
+			t.user_id=#{userId,jdbcType=VARCHAR},
+		where t.order_id=#{orderId}
+	</update>
+
+    <!-- 根据order_id查询订单-->
+    <select id="selectOne" parameterType="String" resultType="OrderInfo">
+        <include refid="selectOrderInfoColunm"></include>
+        from BT_T_ORDER t
+        where t.order_id=#{_parameter}
+    </select>
+
+    <!-- 查询订单集合 -->
+    <select id="selectList" parameterType="OrderInfo" resultType="OrderInfo">
+        <include refid="selectOrderInfoColunm"></include>
+        from BT_T_ORDER t
+        <where>
+            <if test="orderId != null and orderId !=''">
+                and t.order_id = #{orderId}
+            </if>
+			<if test="orderStatus != null and orderStatus !=''">
+				and t.order_status = #{orderStatus}
+			</if>
+			<if test="totalMoney != null and totalMoney !=''">
+				and t.total_money = #{totalMoney}
+			</if>
+			<if test="address != null and address !=''">
+				and instr(t.address,#{address}) >0
+			</if>
+            <if test="userId != null and userId !=''">
+                and t.user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

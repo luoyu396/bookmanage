@@ -16,10 +16,10 @@ public class MyCard implements Serializable {
     private String bookId;
 
     //图书数量
-    private int bookCount;
+    private Integer bookCount;
 
     //排序
-    private int sortNum;
+    private Integer sortNum;
 
     //用户id
     private String userId;
@@ -43,19 +43,19 @@ public class MyCard implements Serializable {
         this.bookId = bookId;
     }
 
-    public int getBookCount() {
+    public Integer getBookCount() {
         return bookCount;
     }
 
-    public void setBookCount(int bookCount) {
+    public void setBookCount(Integer bookCount) {
         this.bookCount = bookCount;
     }
 
-    public int getSortNum() {
+    public Integer getSortNum() {
         return sortNum;
     }
 
-    public void setSortNum(int sortNum) {
+    public void setSortNum(Integer sortNum) {
         this.sortNum = sortNum;
     }
 

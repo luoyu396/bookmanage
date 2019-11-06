@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.book.bookmanage.business.impl.ImageDaoImpl">
+
+    <!-- 查询列 -->
+    <sql id="selectImageColunm">
+		select t.img_id as imgId,
+			 t.img_name as imgName,
+			 t.download_url as downloadUrl,
+			 t.file_size as fileSize,
+			 t.full_save_path as fullSavePath,
+			 t.create_time as createTime
+	</sql>
+
+    <!-- 添加图书附件 -->
+    <insert id="insert" parameterType="Image">
+		insert into BT_T_IMAGE (img_id,
+				img_name,
+				download_url,
+				file_size,
+				full_save_path,
+				create_time)
+		values (#{imgId,jdbcType=VARCHAR},
+				#{imgName,jdbcType=VARCHAR},
+				#{downloadUrl,jdbcType=VARCHAR},
+				#{fileSize,jdbcType=INTEGER},
+				#{fullSavePath,jdbcType=VARCHAR},
+				#{createTime,jdbcType=DATE})
+	</insert>
+
+    <!-- 删除图书附件-->
+    <delete id="delete" parameterType="String">
+		delete from BT_T_IMAGE where img_id=#{_parameter}
+	</delete>
+
+    <!-- 更新图书附件 -->
+    <update id="update" parameterType="Image">
+		update BT_T_IMAGE t
+		set t.img_name=#{imgName,jdbcType=VARCHAR},
+			t.download_url=#{downloadUrl,jdbcType=VARCHAR},
+			t.file_size=#{fileSize,jdbcType=INTEGER},
+			t.full_save_path=#{fullSavePath,jdbcType=VARCHAR},
+		where t.img_id=#{imgId}
+	</update>
+
+    <!-- 根据img_id查询图书附件-->
+    <select id="selectOne" parameterType="String" resultType="Image">
+        <include refid="selectImageColunm"></include>
+        from BT_T_IMAGE t
+        where t.img_id=#{_parameter}
+    </select>
+
+    <!-- 查询图书附件集合 -->
+    <select id="selectList" parameterType="Image" resultType="Image">
+        <include refid="selectImageColunm"></include>
+        from BT_T_IMAGE t
+        <where>
+            <if test="imgId != null and imgId !=''">
+                and t.img_id = #{imgId}
+            </if>
+            <if test="imgName != null and imgName !=''">
+                and instr(t.img_name,#{imgName}) >0
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.book.bookmanage.business.impl.BookDaoImpl">
+
+    <!-- 查询列 -->
+    <sql id="selectBookColunm">
+		select t.book_id as bookId,
+			 t.type_id as typeId,
+			 t.book_name as bookName,
+			 t.ISBN as ISBN,
+			 t.publisher,
+			 t.author,
+			 t.page_num as pageNum,
+			 t.publish_date as publishDate,
+			 t.sale_price as salePrice,
+			 t.introduction,
+			 t.discount,
+			 t.buy_count as buyCount,
+			 t.img_id as imgId,
+			 t.create_time as createTime
+	</sql>
+
+    <!-- 添加图书信息 -->
+    <insert id="insert" parameterType="Book">
+		insert into BT_T_BOOK (book_id,
+				type_id,
+				book_name,
+				ISBN,
+				publisher,
+				author,
+				page_num,
+				publish_date,
+				sale_price,
+				introduction,
+				discount,
+				buy_count,
+				img_id,
+				create_time)
+		values (#{bookId,jdbcBook=VARCHAR},
+				#{typeId,jdbcBook=VARCHAR},
+				#{bookName,jdbcBook=VARCHAR},
+				#{ISBN,jdbcBook=VARCHAR},
+				#{publisher,jdbcBook=VARCHAR},
+				#{author,jdbcBook=VARCHAR},
+				#{pageNum,jdbcBook=INTEGER},
+				#{publishDate,jdbcBook=DATE},
+				#{salePrice,jdbcBook=DOUBLE},
+				#{introduction,jdbcBook=VARCHAR},
+				#{discount,jdbcBook=DOUBLE},
+				#{buyCount,jdbcBook=INTEGER},
+				#{imgId,jdbcBook=VARCHAR},
+				#{createTime,jdbcBook=DATE})
+	</insert>
+
+    <!-- 删除图书信息-->
+    <delete id="delete" parameterType="String">
+		delete from BT_T_BOOK where book_id=#{_parameter}
+	</delete>
+
+    <!-- 更新图书信息 -->
+    <update id="update" parameterType="Book">
+		update BT_T_BOOK t
+		set t.type_id=#{typeId,jdbcBook=VARCHAR},
+			t.book_name=#{bookName,jdbcBook=VARCHAR},
+			t.ISBN=#{ISBN,jdbcBook=VARCHAR},
+			t.publisher=#{publisher,jdbcBook=VARCHAR},
+			t.author=#{author,jdbcBook=VARCHAR},
+			t.page_num=#{pageNum,jdbcBook=INTEGER},
+			t.publish_date=#{publishDate,jdbcBook=DATE},
+			t.sale_price=#{salePrice,jdbcBook=DOUBLE},
+			t.introduction=#{introduction,jdbcBook=VARCHAR},
+			t.discount=#{discount,jdbcBook=DOUBLE},
+			t.buy_count=#{buyCount,jdbcBook=INTEGER},
+			t.img_id=#{imgId,jdbcBook=VARCHAR}
+		where t.book_id=#{bookId}
+	</update>
+
+    <!-- 根据book_id查询图书信息-->
+    <select id="selectOne" parameterType="String" resultType="Book">
+        <include refid="selectBookColunm"></include>
+        from BT_T_BOOK t
+        where t.book_id=#{_parameter}
+    </select>
+
+    <!-- 查询图书信息集合 -->
+    <select id="selectList" parameterType="Book" resultType="Book">
+        <include refid="selectBookColunm"></include>
+        from BT_T_BOOK t
+        <where>
+            <if test="bookId != null and bookId !=''">
+                and t.book_id = #{bookId}
+            </if>
+			<if test="typeId != null and typeId !=''">
+				and t.type_id = #{typeId}
+			</if>
+            <if test="bookName != null and bookName !=''">
+                and instr(t.book_name,#{bookName}) >0
+            </if>
+			<if test="ISBN != null and ISBN !=''">
+				and instr(t.ISBN,#{ISBN}) >0
+			</if>
+            <if test="publisher != null and publisher !=''">
+                and instr(t.publisher,#{publisher}) >0
+            </if>
+            <if test="author != null and author !=''">
+                and instr(t.author,#{author}) >0
+            </if>
+            <if test="pageNum != null and pageNum !=''">
+                and t.page_num = #{pageNum}
+            </if>
+			<if test="publishDate != null and publishDate !=''">
+				and t.publish_date = #{publishDate}
+			</if>
+			<if test="salePrice != null and salePrice !=''">
+				and t.sale_price = #{salePrice}
+			</if>
+			<if test="introduction != null and introduction !=''">
+				and instr(t.introduction,#{introduction}) >0
+			</if>
+			<if test="discount != null and discount !=''">
+				and t.discount = #{discount}
+			</if>
+			<if test="buyCount != null and buyCount !=''">
+				and t.buy_count = #{buyCount}
+			</if>
+        </where>
+    </select>
+
+</mapper>

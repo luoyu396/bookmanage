@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.book.bookmanage.business.impl.MyCardDaoImpl">
+
+    <!-- 查询列 -->
+    <sql id="selectMyCardColunm">
+		select t.card_id as cardId,
+			 t.book_id as bookId,
+			 t.book_count as bookCount,
+			 t.sort_num as sortNum,
+			 t.user_id as userId,
+			 t.create_time as createTime
+	</sql>
+
+    <!-- 添加购物车 -->
+    <insert id="insert" parameterType="MyCard">
+		insert into BT_T_MY_CART (card_id,
+				book_id,
+				book_count,
+				sort_num,
+				user_id,
+				create_time)
+		values (#{cardId,jdbcType=VARCHAR},
+				#{bookId,jdbcType=VARCHAR},
+				#{bookCount,jdbcType=INTEGER},
+				#{sortNum,jdbcType=INTEGER},
+				#{userId,jdbcType=VARCHAR},
+				#{createTime,jdbcType=DATE})
+	</insert>
+
+    <!-- 删除购物车-->
+    <delete id="delete" parameterType="String">
+		delete from BT_T_MY_CART where card_id=#{_parameter}
+	</delete>
+
+    <!-- 更新购物车 -->
+    <update id="update" parameterType="MyCard">
+		update BT_T_MY_CART t
+		set t.book_id=#{bookId,jdbcType=VARCHAR},
+			t.book_count=#{book_count,jdbcType=INTEGER},
+			t.sort_num=#{sortNum,jdbcType=INTEGER},
+			t.user_id=#{userId,jdbcType=VARCHAR},
+		where t.card_id=#{cardId}
+	</update>
+
+    <!-- 根据card_id查询购物车-->
+    <select id="selectOne" parameterType="String" resultType="MyCard">
+        <include refid="selectMyCardColunm"></include>
+        from BT_T_MY_CART t
+        where t.card_id=#{_parameter}
+    </select>
+
+    <!-- 查询购物车集合 -->
+    <select id="selectList" parameterType="MyCard" resultType="MyCard">
+        <include refid="selectMyCardColunm"></include>
+        from BT_T_MY_CART t
+        <where>
+            <if test="cardId != null and cardId !=''">
+                and t.card_id = #{cardId}
+            </if>
+			<if test="bookId != null and bookId !=''">
+				and t.book_id = #{bookId}
+			</if>
+            <if test="userId != null and userId !=''">
+                and t.user_id = #{userId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

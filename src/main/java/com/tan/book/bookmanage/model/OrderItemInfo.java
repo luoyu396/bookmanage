@@ -22,13 +22,13 @@ public class OrderItemInfo implements Serializable {
     private String bookName;
 
     //图书价格
-    private double bookPrice;
+    private Double bookPrice;
 
     //图书数量
-    private int bookCount;
+    private Integer bookCount;
 
     //小计
-    private double subTotal;
+    private Double subTotal;
 
     //创建时间
     private Date createTime;
@@ -65,27 +65,27 @@ public class OrderItemInfo implements Serializable {
         this.bookName = bookName;
     }
 
-    public double getBookPrice() {
+    public Double getBookPrice() {
         return bookPrice;
     }
 
-    public void setBookPrice(double bookPrice) {
+    public void setBookPrice(Double bookPrice) {
         this.bookPrice = bookPrice;
     }
 
-    public int getBookCount() {
+    public Integer getBookCount() {
         return bookCount;
     }
 
-    public void setBookCount(int bookCount) {
+    public void setBookCount(Integer bookCount) {
         this.bookCount = bookCount;
     }
 
-    public double getSubTotal() {
+    public Double getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(double subTotal) {
+    public void setSubTotal(Double subTotal) {
         this.subTotal = subTotal;
     }
 

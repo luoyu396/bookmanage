@@ -16,7 +16,7 @@ public class Type implements Serializable {
     private String typeName;
 
     //分类级别
-    private int leval;
+    private Integer leval;
 
     //父ID
     private String parentId;
@@ -25,7 +25,7 @@ public class Type implements Serializable {
     private String rootId;
 
     //排序
-    private int sortNum;
+    private Integer sortNum;
 
     //创建时间
     private Date createTime;
@@ -46,11 +46,11 @@ public class Type implements Serializable {
         this.typeName = typeName;
     }
 
-    public int getLeval() {
+    public Integer getLeval() {
         return leval;
     }
 
-    public void setLeval(int leval) {
+    public void setLeval(Integer leval) {
         this.leval = leval;
     }
 
@@ -70,11 +70,11 @@ public class Type implements Serializable {
         this.rootId = rootId;
     }
 
-    public int getSortNum() {
+    public Integer getSortNum() {
         return sortNum;
     }
 
-    public void setSortNum(int sortNum) {
+    public void setSortNum(Integer sortNum) {
         this.sortNum = sortNum;
     }
 

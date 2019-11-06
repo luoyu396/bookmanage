@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.book.bookmanage.business.impl.TypeDaoImpl">
+
+    <!-- 查询列 -->
+    <sql id="selectTypeColunm">
+		select t.type_id as typeId,
+			 t.type_name as typeName,
+			 t.leval,
+			 t.parent_id as parentId,
+			 t.root_id as rootId,
+			 t.sort_num as sortNum,
+			 t.create_time as createTime
+	</sql>
+
+    <!-- 添加图书分类 -->
+    <insert id="insert" parameterType="Type">
+		insert into BT_T_TYPE (type_id,
+				type_name,
+				leval,
+				parent_id,
+				root_id,
+				sort_num,
+				create_time)
+		values (#{typeId,jdbcType=VARCHAR},
+				#{typeName,jdbcType=VARCHAR},
+				#{leval,jdbcType=INTEGER},
+				#{parentId,jdbcType=VARCHAR},
+				#{rootId,jdbcType=VARCHAR},
+				#{sortNum,jdbcType=INTEGER},
+				#{createTime,jdbcType=DATE})
+	</insert>
+
+    <!-- 删除图书分类-->
+    <delete id="delete" parameterType="String">
+		delete from BT_T_TYPE where type_id=#{_parameter}
+	</delete>
+
+    <!-- 更新图书分类 -->
+    <update id="update" parameterType="Type">
+		update BT_T_TYPE t
+		set t.type_name=#{typeName,jdbcType=VARCHAR},
+			t.leval=#{leval,jdbcType=INTEGER},
+			t.parent_id=#{parentId,jdbcType=VARCHAR},
+			t.root_id=#{rootId,jdbcType=VARCHAR},
+			t.sort_num=#{sortNum,jdbcType=INTEGER}
+		where t.type_id=#{typeId}
+	</update>
+
+    <!-- 根据type_id查询图书分类-->
+    <select id="selectOne" parameterType="String" resultType="Type">
+        <include refid="selectTypeColunm"></include>
+        from BT_T_TYPE t
+        where t.type_id=#{_parameter}
+    </select>
+
+    <!-- 查询图书分类集合 -->
+    <select id="selectList" parameterType="Type" resultType="Type">
+        <include refid="selectTypeColunm"></include>
+        from BT_T_TYPE t
+        <where>
+            <if test="typeId != null and typeId !=''">
+                and t.type_id = #{typeId}
+            </if>
+            <if test="typeName != null and typeName !=''">
+                and instr(t.type_name,#{typeName}) >0
+            </if>
+            <if test="leval != null and leval !=''">
+                and t.leval = #{leval}
+            </if>
+            <if test="parentId != null and parentId !=''">
+                and t.parent_id = #{parentId}
+            </if>
+            <if test="rootId != null and rootId !=''">
+                and t.root_id = #{rootId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tan.book.bookmanage.business.impl.OrderItemInfoDaoImpl">
+
+    <!-- 查询列 -->
+    <sql id="selectOrderItemInfoColunm">
+		select t.item_id as itemId,
+			 t.order_id as orderId,
+			 t.book_id as bookId,
+			 t.book_name as bookName,
+			 t.book_price as bookPrice,
+			 t.book_count as bookCount,
+			 t.sub_total as subTotal,
+			 t.create_time as createTime
+	</sql>
+
+    <!-- 添加订单条目 -->
+    <insert id="insert" parameterType="OrderItemInfo">
+		insert into BT_T_ORDER_ITEM (item_id,
+				order_id,
+				book_id,
+				book_name,
+				book_price,
+				book_count,
+				sub_total,
+				create_time)
+		values (#{itemId,jdbcType=VARCHAR},
+				#{orderId,jdbcType=VARCHAR},
+				#{bookId,jdbcType=VARCHAR},
+				#{bookName,jdbcType=VARCHAR},
+				#{bookPrice,jdbcType=DOUBLE},
+				#{bookCount,jdbcType=INTEGER},
+				#{subTotal,jdbcType=DOUBLE},
+				#{createTime,jdbcType=DATE})
+	</insert>
+
+    <!-- 删除订单条目-->
+    <delete id="delete" parameterType="String">
+		delete from BT_T_ORDER_ITEM where item_id=#{_parameter}
+	</delete>
+
+    <!-- 更新订单条目 -->
+    <update id="update" parameterType="OrderItemInfo">
+		update BT_T_ORDER_ITEM t
+		set t.order_id=#{orderId,jdbcType=VARCHAR},
+			t.book_id=#{bookId,jdbcType=VARCHAR},
+			t.book_name=#{bookName,jdbcType=VARCHAR},
+			t.book_price=#{bookPrice,jdbcType=DOUBLE},
+			t.book_count=#{bookCount,jdbcType=INTEGER},
+			t.sub_total=#{subTotal,jdbcType=DOUBLE},
+		where t.item_id=#{itemId}
+	</update>
+
+    <!-- 根据item_id查询订单条目-->
+    <select id="selectOne" parameterType="String" resultType="OrderItemInfo">
+        <include refid="selectOrderItemInfoColunm"></include>
+        from BT_T_ORDER_ITEM t
+        where t.item_id=#{_parameter}
+    </select>
+
+    <!-- 查询订单条目集合 -->
+    <select id="selectList" parameterType="OrderItemInfo" resultType="OrderItemInfo">
+        <include refid="selectOrderItemInfoColunm"></include>
+        from BT_T_ORDER_ITEM t
+        <where>
+			<if test="itemId != null and itemId !=''">
+				and t.item_id = #{itemId}
+			</if>
+            <if test="orderId != null and orderId !=''">
+                and t.order_id = #{orderId}
+            </if>
+			<if test="bookName != null and bookName !=''">
+				and instr(t.book_name,#{bookName}) >0
+			</if>
+			<if test="bookPrice != null and bookPrice !=''">
+				and t.book_price = #{bookPrice}
+			</if>
+			<if test="bookCount != null and bookCount !=''">
+				and t.book_count = #{bookCount}
+			</if>
+            <if test="subTotal != null and subTotal !=''">
+                and t.sub_total = #{subTotal}
+            </if>
+        </where>
+    </select>
+
+</mapper>

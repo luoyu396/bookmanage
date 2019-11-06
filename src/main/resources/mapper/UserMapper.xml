@@ -28,7 +28,7 @@
 				telphone,
 				email,
 				address,
-				createTime,
+				create_time,
 				remark)
 		values (#{userId,jdbcType=VARCHAR},
 				#{loginName,jdbcType=VARCHAR},
@@ -76,10 +76,10 @@
 				and t.user_id = #{userId}
 			</if>
 			<if test="login_name != null and login_name !=''">
-				and t.login_name = #{loginName}
+				and instr(t.login_name,#{loginName}) >0
 			</if>
 			<if test="userName != null and userName !=''">
-				and t.user_name = #{userName}
+				and instr(t.user_name,#{userName}) >0
 			</if>
 			<if test="telphone != null and telphone !=''">
 				and instr(t.telphone,#{telphone}) >0

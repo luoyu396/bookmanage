@@ -28,22 +28,22 @@ public class Book implements Serializable {
     private String author;
 
     //页数
-    private int pageNum;
+    private Integer pageNum;
 
     //出版时间
     private Date publishDate;
 
     //销售价格
-    private double salePrice;
+    private Double salePrice;
 
     //图书简介
     private String introduction;
 
     //折扣率
-    private double discount;
+    private Double discount;
 
     //销售数量
-    private int buyCount;
+    private Integer buyCount;
 
     //图片id
     private String imgId;
@@ -99,11 +99,11 @@ public class Book implements Serializable {
         this.author = author;
     }
 
-    public int getPageNum() {
+    public Integer getPageNum() {
         return pageNum;
     }
 
-    public void setPageNum(int pageNum) {
+    public void setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
     }
 
@@ -115,11 +115,11 @@ public class Book implements Serializable {
         this.publishDate = publishDate;
     }
 
-    public double getSalePrice() {
+    public Double getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(double salePrice) {
+    public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
     }
 
@@ -131,19 +131,19 @@ public class Book implements Serializable {
         this.introduction = introduction;
     }
 
-    public double getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(double discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
-    public int getBuyCount() {
+    public Integer getBuyCount() {
         return buyCount;
     }
 
-    public void setBuyCount(int buyCount) {
+    public void setBuyCount(Integer buyCount) {
         this.buyCount = buyCount;
     }
 
