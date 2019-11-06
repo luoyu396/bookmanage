@@ -38,20 +38,20 @@
 				buy_count,
 				img_id,
 				create_time)
-		values (#{bookId,jdbcBook=VARCHAR},
-				#{typeId,jdbcBook=VARCHAR},
-				#{bookName,jdbcBook=VARCHAR},
-				#{ISBN,jdbcBook=VARCHAR},
-				#{publisher,jdbcBook=VARCHAR},
-				#{author,jdbcBook=VARCHAR},
-				#{pageNum,jdbcBook=INTEGER},
-				#{publishDate,jdbcBook=DATE},
-				#{salePrice,jdbcBook=DOUBLE},
-				#{introduction,jdbcBook=VARCHAR},
-				#{discount,jdbcBook=DOUBLE},
-				#{buyCount,jdbcBook=INTEGER},
-				#{imgId,jdbcBook=VARCHAR},
-				#{createTime,jdbcBook=DATE})
+		values (#{bookId,jdbcType=VARCHAR},
+				#{typeId,jdbcType=VARCHAR},
+				#{bookName,jdbcType=VARCHAR},
+				#{ISBN,jdbcType=VARCHAR},
+				#{publisher,jdbcType=VARCHAR},
+				#{author,jdbcType=VARCHAR},
+				#{pageNum,jdbcType=INTEGER},
+				#{publishDate,jdbcType=DATE},
+				#{salePrice,jdbcType=DOUBLE},
+				#{introduction,jdbcType=VARCHAR},
+				#{discount,jdbcType=DOUBLE},
+				#{buyCount,jdbcType=INTEGER},
+				#{imgId,jdbcType=VARCHAR},
+				#{createTime,jdbcType=DATE})
 	</insert>
 
     <!-- 删除图书信息-->
@@ -62,18 +62,18 @@
     <!-- 更新图书信息 -->
     <update id="update" parameterType="Book">
 		update BT_T_BOOK t
-		set t.type_id=#{typeId,jdbcBook=VARCHAR},
-			t.book_name=#{bookName,jdbcBook=VARCHAR},
-			t.ISBN=#{ISBN,jdbcBook=VARCHAR},
-			t.publisher=#{publisher,jdbcBook=VARCHAR},
-			t.author=#{author,jdbcBook=VARCHAR},
-			t.page_num=#{pageNum,jdbcBook=INTEGER},
-			t.publish_date=#{publishDate,jdbcBook=DATE},
-			t.sale_price=#{salePrice,jdbcBook=DOUBLE},
-			t.introduction=#{introduction,jdbcBook=VARCHAR},
-			t.discount=#{discount,jdbcBook=DOUBLE},
-			t.buy_count=#{buyCount,jdbcBook=INTEGER},
-			t.img_id=#{imgId,jdbcBook=VARCHAR}
+		set t.type_id=#{typeId,jdbcType=VARCHAR},
+			t.book_name=#{bookName,jdbcType=VARCHAR},
+			t.ISBN=#{ISBN,jdbcType=VARCHAR},
+			t.publisher=#{publisher,jdbcType=VARCHAR},
+			t.author=#{author,jdbcType=VARCHAR},
+			t.page_num=#{pageNum,jdbcType=INTEGER},
+			t.publish_date=#{publishDate,jdbcType=DATE},
+			t.sale_price=#{salePrice,jdbcType=DOUBLE},
+			t.introduction=#{introduction,jdbcType=VARCHAR},
+			t.discount=#{discount,jdbcType=DOUBLE},
+			t.buy_count=#{buyCount,jdbcType=INTEGER},
+			t.img_id=#{imgId,jdbcType=VARCHAR}
 		where t.book_id=#{bookId}
 	</update>
 
