@@ -92,5 +92,12 @@
 			</if>
 		</where>
 	</select>
-	
+
+	<!-- 验证用户登录用户-->
+	<select id="validLogin" parameterType="User" resultType="int">
+		select count(1)
+		from BT_T_USER t
+		where t.login_name=#{loginName} and t.password=#{password} and t.user_type=#{userType}
+	</select>
+
 </mapper>

@@ -26,5 +26,8 @@ public class UserServiceImpl extends AbstractService implements IUserService {
     @Autowired
     private IUserDao userDao;
 
-
+    @Override
+    public boolean validLogin(String loginName, String password, String userType) {
+        return userDao.validLogin(loginName, password, userType);
+    }
 }

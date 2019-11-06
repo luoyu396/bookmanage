@@ -15,6 +15,10 @@ public abstract class AbstractDao implements IBaseDao {
     @Autowired
     SqlSessionTemplate sqlSessionTemplate;
 
+    public SqlSessionTemplate getSqlSessionTemplate() {
+        return sqlSessionTemplate;
+    }
+
     @Override
     public <T> int insert(T params) {
         return sqlSessionTemplate.insert(this.getClass().getName()+".insert",params);
