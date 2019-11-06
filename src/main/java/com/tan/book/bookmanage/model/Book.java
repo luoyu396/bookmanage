@@ -6,7 +6,6 @@ import java.util.Date;
 /**
  * 图书信息表
  * @author tanbb
- * @create 2019-11-06 16:05
  */
 public class Book implements Serializable {
 
