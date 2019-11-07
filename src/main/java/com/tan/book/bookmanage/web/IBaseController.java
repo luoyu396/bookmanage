@@ -1,6 +1,7 @@
 package com.tan.book.bookmanage.web;
 
 import com.tan.book.bookmanage.model.AjaxResult;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * 基础控制器接口
@@ -39,4 +40,25 @@ import com.tan.book.bookmanage.model.AjaxResult;
      * @return AjaxResult
      **/
     AjaxResult queryListPage2(int page, int rows, T params);
+
+    /**
+     * 保存
+     * @param params
+     * @return
+     */
+    AjaxResult save(T params);
+
+    /**
+     * 更新
+     * @param params
+     * @return
+     */
+    AjaxResult update(T params);
+
+   /**
+    * 删除
+    * @param id
+    * @return
+    */
+    AjaxResult delete(String id);
 }

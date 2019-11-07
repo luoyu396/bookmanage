@@ -42,4 +42,13 @@ public class UserDaoImpl extends AbstractDao implements IUserDao {
         }
         return null;
     }
+
+    @Override
+    public boolean updatePassword(User user) {
+        if(user == null || StringUtils.isBlank(user.getUserId()) || StringUtils.isBlank(user.getPassword())) {
+            return false;
+        }
+        int count =  super.getSqlSessionTemplate().update(this.getClass().getName()+".updatePassword",user);
+        return count >0 ? true : false;
+    }
 }

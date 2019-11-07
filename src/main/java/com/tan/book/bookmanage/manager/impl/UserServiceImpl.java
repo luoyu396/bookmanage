@@ -36,4 +36,9 @@ public class UserServiceImpl extends AbstractService implements IUserService {
     public User getUser(String loginName, String password, String userType) {
         return userDao.getUser(loginName, password, userType);
     }
+
+    @Override
+    public boolean updatePassword(User user) {
+        return userDao.updatePassword(user);
+    }
 }

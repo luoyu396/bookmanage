@@ -78,4 +78,94 @@ public abstract class AbstractController<T> implements IBaseController<T>{
         }
         return result;
     }
+    //保存前方法
+    protected void initSave(T params){}
+    /**
+     * 保存
+     * @param params
+     * @return
+     */
+    @Override
+    @PostMapping("save")
+    public AjaxResult save(@RequestBody T params) {
+        AjaxResult result = new AjaxResult();
+        try {
+            initSave(params);
+            int c = baseService.insert(params);
+            if(c > 0) {
+                result.put("code", Constants.SUCCESS);
+                postSave(params);
+            }
+            else {
+                result.put("code", Constants.ERROR);
+                result.put("msg", "保存失败！" );
+            }
+        }catch (Exception e) {
+            result.put("code", Constants.SYS_ERROR);
+            result.put("msg", "系统错误请联系管理人员");
+            e.printStackTrace();
+        }
+        return result;
+    }
+    //保存后方法
+    protected void postSave(T params){}
+    //更新前方法
+    protected void initUpdate(T params){}
+    /**
+     * 更新
+     * @param params
+     * @return
+     */
+    @Override
+    @PutMapping("update")
+    public AjaxResult update(@RequestBody T params){
+        AjaxResult result = new AjaxResult();
+        try {
+            initUpdate(params);
+            int c = baseService.update(params);
+            if(c > 0) {
+                result.put("code", Constants.SUCCESS);
+                postUpdate(params);
+            }
+            else {
+                result.put("code", Constants.ERROR);
+                result.put("msg", "更新失败！" );
+            }
+        }catch (Exception e) {
+            result.put("code", Constants.SYS_ERROR);
+            result.put("msg", "系统错误请联系管理人员");
+            e.printStackTrace();
+        }
+        return result;
+    }
+    //更新后方法
+    protected void postUpdate(T params){}
+
+    //删除前方法
+    protected void initDelete(String params){}
+    @Override
+    @DeleteMapping("delete/{id}")
+    public AjaxResult delete(@PathVariable("id") String params){
+        AjaxResult result = new AjaxResult();
+        try {
+            initDelete(params);
+            int c = baseService.delete(params);
+            if(c > 0) {
+                result.put("code", Constants.SUCCESS);
+                postDelete(params);
+            }
+            else {
+                result.put("code", Constants.ERROR);
+                result.put("msg", "删除失败！" );
+            }
+        }catch (Exception e) {
+            result.put("code", Constants.SYS_ERROR);
+            result.put("msg", "系统错误请联系管理人员");
+            e.printStackTrace();
+        }
+        return result;
+    }
+    //删除后方法
+    protected void postDelete(String params){}
+
 }

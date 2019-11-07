@@ -6,15 +6,15 @@ import com.tan.book.bookmanage.model.Constants;
 import com.tan.book.bookmanage.model.User;
 import com.tan.book.bookmanage.service.IBaseService;
 import com.tan.book.bookmanage.web.AbstractController;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.UUID;
 
 /**
  * 用户控制器
@@ -30,8 +30,7 @@ public class UserController extends AbstractController<User> {
     }
 
     @Autowired
-    private IUserService UserService;
-
+    private IUserService userService;
 
     /**
      * 获取当前登录用户信息
@@ -71,4 +70,44 @@ public class UserController extends AbstractController<User> {
         }
         return result;
     }
+
+    @Override
+    protected void initSave(User params) {
+        params.setUserId(UUID.randomUUID().toString());
+    }
+
+    /**
+     * 更新密码
+     * @param userId 用户ID
+     * @param password 密码
+     * @return
+     */
+    @PutMapping("updatePassword")
+    public AjaxResult updatePassword(String userId, String password){
+        AjaxResult result = new AjaxResult();
+        if(StringUtils.isBlank(userId) || StringUtils.isBlank(password)) {
+            result.put("code", Constants.ERROR);
+            result.put("msg", "参数不能为空！" );
+            return result;
+        }
+        try {
+            User user = new User();
+            user.setUserId(userId);
+            user.setPassword(password);
+            boolean flag = userService.updatePassword(user);
+            if(flag) {
+                result.put("code", Constants.SUCCESS);
+            }
+            else {
+                result.put("code", Constants.ERROR);
+                result.put("msg", "更新失败！" );
+            }
+        }catch (Exception e) {
+            result.put("code", Constants.SYS_ERROR);
+            result.put("msg", "系统错误请联系管理人员");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

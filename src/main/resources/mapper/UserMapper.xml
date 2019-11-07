@@ -52,7 +52,6 @@
 		update BT_T_USER t
 		set t.login_name=#{loginName,jdbcType=VARCHAR},
 			t.user_name=#{userName,jdbcType=VARCHAR},
-			t.phone=#{phone,jdbcType=VARCHAR},
 			t.telphone=#{telphone,jdbcType=VARCHAR},
 			t.email=#{email,jdbcType=VARCHAR},
 			t.address=#{address,jdbcType=VARCHAR},
@@ -81,6 +80,9 @@
 			<if test="userName != null and userName !=''">
 				and instr(t.user_name,#{userName}) >0
 			</if>
+			<if test="userType != null and userType !=''">
+				and t.user_type = #{userType}
+			</if>
 			<if test="telphone != null and telphone !=''">
 				and instr(t.telphone,#{telphone}) >0
 			</if>
@@ -91,6 +93,7 @@
 				and instr(t.address, #{address}) >0
 			</if>
 		</where>
+		order by t.create_time desc
 	</select>
 
 	<!-- 验证用户登录用户-->
@@ -106,4 +109,11 @@
 		from BT_T_USER t
 		where t.login_name=#{loginName} and t.password=#{password} and t.user_type=#{userType}
 	</select>
+
+	<!-- 更新密码 -->
+	<update id="updatePassword" parameterType="User">
+		update BT_T_USER t
+		set t.password=#{password,jdbcType=VARCHAR}
+		where t.user_id=#{userId}
+	</update>
 </mapper>

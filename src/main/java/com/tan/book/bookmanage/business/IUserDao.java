@@ -26,4 +26,11 @@ public interface IUserDao extends IBaseDao {
      * @return
      */
     User getUser(String loginName, String password, String userType);
+
+    /**
+     * 更新密码
+     * @param user 用户表
+     * @return
+     */
+    boolean updatePassword(User user);
 }
