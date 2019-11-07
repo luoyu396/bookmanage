@@ -3,6 +3,7 @@ package com.tan.book.bookmanage.manager.impl;
 import com.tan.book.bookmanage.business.IUserDao;
 import com.tan.book.bookmanage.dao.IBaseDao;
 import com.tan.book.bookmanage.manager.IUserService;
+import com.tan.book.bookmanage.model.User;
 import com.tan.book.bookmanage.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,10 @@ public class UserServiceImpl extends AbstractService implements IUserService {
     @Override
     public boolean validLogin(String loginName, String password, String userType) {
         return userDao.validLogin(loginName, password, userType);
+    }
+
+    @Override
+    public User getUser(String loginName, String password, String userType) {
+        return userDao.getUser(loginName, password, userType);
     }
 }

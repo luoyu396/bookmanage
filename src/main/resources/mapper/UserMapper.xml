@@ -75,7 +75,7 @@
 			<if test="userId != null and userId !=''">
 				and t.user_id = #{userId}
 			</if>
-			<if test="login_name != null and login_name !=''">
+			<if test="loginName != null and loginName !=''">
 				and instr(t.login_name,#{loginName}) >0
 			</if>
 			<if test="userName != null and userName !=''">
@@ -100,4 +100,10 @@
 		where t.login_name=#{loginName} and t.password=#{password} and t.user_type=#{userType}
 	</select>
 
+	<!-- 查询用户 -->
+	<select id="getUser" parameterType="User" resultType="User">
+		<include refid="selectUserColunm"></include>
+		from BT_T_USER t
+		where t.login_name=#{loginName} and t.password=#{password} and t.user_type=#{userType}
+	</select>
 </mapper>

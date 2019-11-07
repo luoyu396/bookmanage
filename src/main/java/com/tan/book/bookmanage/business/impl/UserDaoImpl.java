@@ -6,6 +6,8 @@ import com.tan.book.bookmanage.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 用户数据接口实现
  * @author tanbb
@@ -25,5 +27,19 @@ public class UserDaoImpl extends AbstractDao implements IUserDao {
         user.setUserType(userType);
         int count = super.getSqlSessionTemplate().selectOne(this.getClass().getName()+".validLogin",user);
         return count >0 ? true : false;
+    }
+
+    @Override
+    public User getUser(String loginName, String password, String userType) {
+        //用户
+        User user = new User();
+        user.setLoginName(loginName);
+        user.setPassword(password);
+        user.setUserType(userType);
+        List<User> list = super.getSqlSessionTemplate().selectList(this.getClass().getName()+".getUser",user);
+        if(!list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
     }
 }
