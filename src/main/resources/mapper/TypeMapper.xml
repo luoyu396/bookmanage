@@ -24,7 +24,15 @@
 				root_id,
 				sort_num,
 				create_time)
-		values (#{typeId,jdbcType=VARCHAR},
+		values (
+				<choose>
+					<when test="typeId != null and typeId !=''">
+						#{typeId,jdbcType=VARCHAR},
+					</when>
+					<otherwise>
+						UUID(),
+					</otherwise>
+				</choose>
 				#{typeName,jdbcType=VARCHAR},
 				#{leval,jdbcType=INTEGER},
 				#{parentId,jdbcType=VARCHAR},
@@ -77,6 +85,7 @@
                 and t.root_id = #{rootId}
             </if>
         </where>
+		order by t.leval, t.sort_num
     </select>
 
 </mapper>

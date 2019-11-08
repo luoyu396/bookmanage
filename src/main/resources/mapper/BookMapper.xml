@@ -38,7 +38,15 @@
 				buy_count,
 				img_id,
 				create_time)
-		values (#{bookId,jdbcType=VARCHAR},
+		values (
+				<choose>
+					<when test="bookId != null and bookId !=''">
+						#{bookId,jdbcType=VARCHAR},
+					</when>
+					<otherwise>
+						UUID(),
+					</otherwise>
+				</choose>
 				#{typeId,jdbcType=VARCHAR},
 				#{bookName,jdbcType=VARCHAR},
 				#{ISBN,jdbcType=VARCHAR},

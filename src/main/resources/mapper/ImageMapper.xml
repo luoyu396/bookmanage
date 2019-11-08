@@ -22,7 +22,15 @@
 				file_size,
 				full_save_path,
 				create_time)
-		values (#{imgId,jdbcType=VARCHAR},
+		values (
+				<choose>
+					<when test="imgId != null and imgId !=''">
+						#{imgId,jdbcType=VARCHAR},
+					</when>
+					<otherwise>
+						UUID(),
+					</otherwise>
+				</choose>
 				#{imgName,jdbcType=VARCHAR},
 				#{downloadUrl,jdbcType=VARCHAR},
 				#{fileSize,jdbcType=INTEGER},

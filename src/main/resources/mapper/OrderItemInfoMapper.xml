@@ -26,7 +26,15 @@
 				book_count,
 				sub_total,
 				create_time)
-		values (#{itemId,jdbcType=VARCHAR},
+		values (
+				<choose>
+					<when test="itemId != null and itemId !=''">
+						#{itemId,jdbcType=VARCHAR},
+					</when>
+					<otherwise>
+						UUID(),
+					</otherwise>
+				</choose>
 				#{orderId,jdbcType=VARCHAR},
 				#{bookId,jdbcType=VARCHAR},
 				#{bookName,jdbcType=VARCHAR},

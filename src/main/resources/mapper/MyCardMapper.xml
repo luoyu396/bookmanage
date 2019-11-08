@@ -22,7 +22,15 @@
 				sort_num,
 				user_id,
 				create_time)
-		values (#{cardId,jdbcType=VARCHAR},
+		values (
+				<choose>
+					<when test="cardId != null and cardId !=''">
+						#{cardId,jdbcType=VARCHAR},
+					</when>
+					<otherwise>
+						UUID(),
+					</otherwise>
+				</choose>
 				#{bookId,jdbcType=VARCHAR},
 				#{bookCount,jdbcType=INTEGER},
 				#{sortNum,jdbcType=INTEGER},

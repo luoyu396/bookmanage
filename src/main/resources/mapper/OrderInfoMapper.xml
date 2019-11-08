@@ -22,7 +22,15 @@
 				address,
 				user_id,
 				create_time)
-		values (#{orderId,jdbcType=VARCHAR},
+		values (
+				<choose>
+					<when test="orderId != null and orderId !=''">
+						#{orderId,jdbcType=VARCHAR},
+					</when>
+					<otherwise>
+						UUID(),
+					</otherwise>
+				</choose>
 				#{orderStatus,jdbcType=VARCHAR},
 				#{totalMoney,jdbcType=DOUBLE},
 				#{address,jdbcType=VARCHAR},

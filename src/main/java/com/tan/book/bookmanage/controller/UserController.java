@@ -71,11 +71,6 @@ public class UserController extends AbstractController<User> {
         return result;
     }
 
-    @Override
-    protected void initSave(User params) {
-        params.setUserId(UUID.randomUUID().toString());
-    }
-
     /**
      * 更新密码
      * @param userId 用户ID
