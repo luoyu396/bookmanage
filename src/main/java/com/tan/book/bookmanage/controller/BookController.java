@@ -2,7 +2,6 @@ package com.tan.book.bookmanage.controller;
 
 import com.tan.book.bookmanage.manager.IBookService;
 import com.tan.book.bookmanage.model.Book;
-import com.tan.book.bookmanage.model.Type;
 import com.tan.book.bookmanage.service.IBaseService;
 import com.tan.book.bookmanage.web.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;

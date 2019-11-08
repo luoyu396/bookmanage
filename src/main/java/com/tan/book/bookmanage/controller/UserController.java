@@ -8,13 +8,11 @@ import com.tan.book.bookmanage.service.IBaseService;
 import com.tan.book.bookmanage.web.AbstractController;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.UUID;
 
 /**
  * 用户控制器
