@@ -33,7 +33,7 @@
 				</choose>
 				#{imgName,jdbcType=VARCHAR},
 				#{downloadUrl,jdbcType=VARCHAR},
-				#{fileSize,jdbcType=INTEGER},
+				#{fileSize,jdbcType=BIGINT},
 				#{fullSavePath,jdbcType=VARCHAR},
 				#{createTime,jdbcType=DATE})
 	</insert>
@@ -48,7 +48,7 @@
 		update BT_T_IMAGE t
 		set t.img_name=#{imgName,jdbcType=VARCHAR},
 			t.download_url=#{downloadUrl,jdbcType=VARCHAR},
-			t.file_size=#{fileSize,jdbcType=INTEGER},
+			t.file_size=#{fileSize,jdbcType=BIGINT},
 			t.full_save_path=#{fullSavePath,jdbcType=VARCHAR},
 		where t.img_id=#{imgId}
 	</update>

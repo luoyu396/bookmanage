@@ -9,7 +9,7 @@
 		select t.book_id as bookId,
 			 t.type_id as typeId,
 			 t.book_name as bookName,
-			 t.ISBN as ISBN,
+			 t.isbn as isbn,
 			 t.publisher,
 			 t.author,
 			 t.page_num as pageNum,
@@ -19,7 +19,8 @@
 			 t.discount,
 			 t.buy_count as buyCount,
 			 t.img_id as imgId,
-			 t.create_time as createTime
+			 t.create_time as createTime,
+			 g.type_name as typeName
 	</sql>
 
     <!-- 添加图书信息 -->
@@ -27,7 +28,7 @@
 		insert into BT_T_BOOK (book_id,
 				type_id,
 				book_name,
-				ISBN,
+				isbn,
 				publisher,
 				author,
 				page_num,
@@ -49,7 +50,7 @@
 				</choose>
 				#{typeId,jdbcType=VARCHAR},
 				#{bookName,jdbcType=VARCHAR},
-				#{ISBN,jdbcType=VARCHAR},
+				#{isbn,jdbcType=VARCHAR},
 				#{publisher,jdbcType=VARCHAR},
 				#{author,jdbcType=VARCHAR},
 				#{pageNum,jdbcType=INTEGER},
@@ -72,7 +73,7 @@
 		update BT_T_BOOK t
 		set t.type_id=#{typeId,jdbcType=VARCHAR},
 			t.book_name=#{bookName,jdbcType=VARCHAR},
-			t.ISBN=#{ISBN,jdbcType=VARCHAR},
+			t.isbn=#{isbn,jdbcType=VARCHAR},
 			t.publisher=#{publisher,jdbcType=VARCHAR},
 			t.author=#{author,jdbcType=VARCHAR},
 			t.page_num=#{pageNum,jdbcType=INTEGER},
@@ -88,15 +89,15 @@
     <!-- 根据book_id查询图书信息-->
     <select id="selectOne" parameterType="String" resultType="Book">
         <include refid="selectBookColunm"></include>
-        from BT_T_BOOK t
-        where t.book_id=#{_parameter}
+        from BT_T_BOOK t , BT_T_TYPE g
+        where t.type_id = g.type_id and t.book_id=#{_parameter}
     </select>
 
     <!-- 查询图书信息集合 -->
     <select id="selectList" parameterType="Book" resultType="Book">
         <include refid="selectBookColunm"></include>
-        from BT_T_BOOK t
-        <where>
+        from BT_T_BOOK t, BT_T_TYPE g
+		where t.type_id = g.type_id
             <if test="bookId != null and bookId !=''">
                 and t.book_id = #{bookId}
             </if>
@@ -106,8 +107,8 @@
             <if test="bookName != null and bookName !=''">
                 and instr(t.book_name,#{bookName}) >0
             </if>
-			<if test="ISBN != null and ISBN !=''">
-				and instr(t.ISBN,#{ISBN}) >0
+			<if test="isbn != null and isbn !=''">
+				and instr(t.isbn,#{isbn}) >0
 			</if>
             <if test="publisher != null and publisher !=''">
                 and instr(t.publisher,#{publisher}) >0
@@ -133,7 +134,7 @@
 			<if test="buyCount != null and buyCount !=''">
 				and t.buy_count = #{buyCount}
 			</if>
-        </where>
+		order by t.create_time desc
     </select>
 
 </mapper>

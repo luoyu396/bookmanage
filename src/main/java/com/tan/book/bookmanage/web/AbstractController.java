@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.tan.book.bookmanage.model.AjaxResult;
 import com.tan.book.bookmanage.model.Constants;
 import com.tan.book.bookmanage.service.IBaseService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +24,23 @@ public abstract class AbstractController<T> implements IBaseController<T>{
 
     @Override
     @GetMapping("selectOne/{id}")
-    public String selectOne(@PathVariable("id") Object id) {
-        return JSON.toJSONString(baseService.selectOne(id));
+    public AjaxResult selectOne(@PathVariable("id") Object id) {
+        AjaxResult result = new AjaxResult();
+        if(id == null) {
+            result.put("code", Constants.ERROR);
+            result.put("msg", "参数不能为空！" );
+            return result;
+        }
+        try {
+            Object object = baseService.selectOne(id);
+            result.put("data", object);
+            result.put("code", Constants.SUCCESS);
+        }catch (Exception e) {
+            result.put("code", Constants.SYS_ERROR);
+            result.put("msg", "系统错误请联系管理人员");
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override

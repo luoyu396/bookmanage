@@ -19,7 +19,7 @@ public class Image implements Serializable {
     private String downloadUrl;
 
     //文件大小
-    private Integer fileSize;
+    private Long fileSize;
 
     //保存路径
     private String fullSavePath;
@@ -51,11 +51,11 @@ public class Image implements Serializable {
         this.downloadUrl = downloadUrl;
     }
 
-    public Integer getFileSize() {
+    public Long getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(Integer fileSize) {
+    public void setFileSize(Long fileSize) {
         this.fileSize = fileSize;
     }
 
