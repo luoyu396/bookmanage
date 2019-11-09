@@ -45,10 +45,10 @@ public abstract class AbstractController<T> implements IBaseController<T>{
 
     @Override
     @GetMapping("queryList")
-    public AjaxResult queryList() {
+    public AjaxResult queryList(T params) {
         AjaxResult result = new AjaxResult();
         try {
-            List<T> list = baseService.selectList(null);
+            List<T> list = baseService.selectList(params);
             result.put("data", list);
             result.put("code", Constants.SUCCESS);
         }catch (Exception e) {

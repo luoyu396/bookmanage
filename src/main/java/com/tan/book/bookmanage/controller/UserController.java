@@ -103,4 +103,30 @@ public class UserController extends AbstractController<User> {
         return result;
     }
 
+    /**
+     * 更新当前会话用户信息
+     * @param request
+     * @return
+     */
+    @GetMapping("updateSessionUser/{userId}")
+    public AjaxResult updateSessionUser(@PathVariable("userId") String userId, HttpServletRequest request) {
+        AjaxResult result = new AjaxResult();
+        try {
+            HttpSession session = request.getSession();
+            User user = userService.selectOne(userId);
+            if(user == null) {
+                result.put("code", Constants.ERROR);
+                result.put("msg", "用户不存在！" );
+                return result;
+            }
+            request.getSession().setAttribute("user", user);
+            result.put("code", Constants.SUCCESS);
+            result.put("data", user);
+        }catch (Exception e) {
+            result.put("code", Constants.SYS_ERROR);
+            result.put("msg", "系统错误请联系管理人员");
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

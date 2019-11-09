@@ -24,6 +24,9 @@ public class OrderInfo implements Serializable {
     //用户id
     private String userId;
 
+    //用户名
+    private String userName;
+
     //创建时间
     private Date createTime;
 
@@ -65,6 +68,14 @@ public class OrderInfo implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Date getCreateTime() {

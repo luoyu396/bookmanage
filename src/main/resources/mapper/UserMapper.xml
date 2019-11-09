@@ -39,7 +39,6 @@
 						UUID(),
 					</otherwise>
 				</choose>
-				#{userId,jdbcType=VARCHAR},
 				#{loginName,jdbcType=VARCHAR},
 				#{userName,jdbcType=VARCHAR},
 				#{userType,jdbcType=VARCHAR},

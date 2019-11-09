@@ -22,7 +22,7 @@ import com.tan.book.bookmanage.model.AjaxResult;
      * @Param []
      * @return AjaxResult
      **/
-    AjaxResult queryList();
+    AjaxResult queryList(T params);
 
     /**
      * @Author tanbb

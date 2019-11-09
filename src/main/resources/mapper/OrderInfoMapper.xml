@@ -11,7 +11,8 @@
 			 t.total_money as totalMoney,
 			 t.address,
 			 t.user_id as userId,
-			 t.create_time as createTime
+			 t.create_time as createTime,
+			 u.user_name as userName
 	</sql>
 
     <!-- 添加订单 -->
@@ -28,7 +29,7 @@
 						#{orderId,jdbcType=VARCHAR},
 					</when>
 					<otherwise>
-						UUID(),
+						unix_timestamp(now()),
 					</otherwise>
 				</choose>
 				#{orderStatus,jdbcType=VARCHAR},
@@ -49,22 +50,22 @@
 		set t.order_status=#{orderStatus,jdbcType=VARCHAR},
 			t.total_money=#{totalMoney,jdbcType=DOUBLE},
 			t.address=#{address,jdbcType=VARCHAR},
-			t.user_id=#{userId,jdbcType=VARCHAR},
+			t.user_id=#{userId,jdbcType=VARCHAR}
 		where t.order_id=#{orderId}
 	</update>
 
     <!-- 根据order_id查询订单-->
     <select id="selectOne" parameterType="String" resultType="OrderInfo">
         <include refid="selectOrderInfoColunm"></include>
-        from BT_T_ORDER t
-        where t.order_id=#{_parameter}
+        from BT_T_ORDER t, BT_T_USER u
+        where t.user_id = u.user_id and t.order_id=#{_parameter}
     </select>
 
     <!-- 查询订单集合 -->
     <select id="selectList" parameterType="OrderInfo" resultType="OrderInfo">
         <include refid="selectOrderInfoColunm"></include>
-        from BT_T_ORDER t
-        <where>
+        from BT_T_ORDER t, BT_T_USER u
+		where t.user_id = u.user_id
             <if test="orderId != null and orderId !=''">
                 and t.order_id = #{orderId}
             </if>
@@ -80,7 +81,8 @@
             <if test="userId != null and userId !=''">
                 and t.user_id = #{userId}
             </if>
-        </where>
+			<if test="userName != null and userName !=''">
+				and instr(u.user_name,#{userName}) >0
+			</if>
     </select>
-
 </mapper>
