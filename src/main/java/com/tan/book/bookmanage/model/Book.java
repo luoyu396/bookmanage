@@ -45,9 +45,6 @@ public class Book implements Serializable {
     //折扣率
     private Double discount;
 
-    //销售数量
-    private Integer buyCount;
-
     //图片id
     private String imgId;
 
@@ -148,14 +145,6 @@ public class Book implements Serializable {
 
     public void setDiscount(Double discount) {
         this.discount = discount;
-    }
-
-    public Integer getBuyCount() {
-        return buyCount;
-    }
-
-    public void setBuyCount(Integer buyCount) {
-        this.buyCount = buyCount;
     }
 
     public String getImgId() {

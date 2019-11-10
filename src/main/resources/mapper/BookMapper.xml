@@ -17,7 +17,6 @@
 			 t.sale_price as salePrice,
 			 t.introduction,
 			 t.discount,
-			 t.buy_count as buyCount,
 			 t.img_id as imgId,
 			 t.create_time as createTime,
 			 g.type_name as typeName
@@ -36,7 +35,6 @@
 				sale_price,
 				introduction,
 				discount,
-				buy_count,
 				img_id,
 				create_time)
 		values (
@@ -58,7 +56,6 @@
 				#{salePrice,jdbcType=DOUBLE},
 				#{introduction,jdbcType=VARCHAR},
 				#{discount,jdbcType=DOUBLE},
-				#{buyCount,jdbcType=INTEGER},
 				#{imgId,jdbcType=VARCHAR},
 				#{createTime,jdbcType=DATE})
 	</insert>
@@ -81,7 +78,6 @@
 			t.sale_price=#{salePrice,jdbcType=DOUBLE},
 			t.introduction=#{introduction,jdbcType=VARCHAR},
 			t.discount=#{discount,jdbcType=DOUBLE},
-			t.buy_count=#{buyCount,jdbcType=INTEGER},
 			t.img_id=#{imgId,jdbcType=VARCHAR}
 		where t.book_id=#{bookId}
 	</update>
@@ -130,9 +126,6 @@
 			</if>
 			<if test="discount != null and discount !=''">
 				and t.discount = #{discount}
-			</if>
-			<if test="buyCount != null and buyCount !=''">
-				and t.buy_count = #{buyCount}
 			</if>
 		order by t.create_time desc
     </select>

@@ -1,6 +1,7 @@
 package com.tan.book.bookmanage.service.impl;
 
 import com.tan.book.bookmanage.business.IOrderItemInfoDao;
+import com.tan.book.bookmanage.model.StatisticData;
 import com.tan.book.common.dao.IBaseDao;
 import com.tan.book.bookmanage.service.IOrderItemInfoService;
 import com.tan.book.common.manager.AbstractService;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 订单条目服务接口实现
@@ -28,4 +31,13 @@ public class OrderItemInfoServiceImpl extends AbstractService implements IOrderI
     private IOrderItemInfoDao orderItemInfoDao;
 
 
+    @Override
+    public List<StatisticData> statSaleCountList(Map<String, Object> map) {
+        return orderItemInfoDao.statSaleCountList(map);
+    }
+
+    @Override
+    public List<StatisticData> statSalePriceList(Map<String, Object> map) {
+        return orderItemInfoDao.statSalePriceList(map);
+    }
 }
