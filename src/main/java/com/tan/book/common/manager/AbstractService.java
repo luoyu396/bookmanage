@@ -1,4 +1,4 @@
-package com.tan.book.common.service;
+package com.tan.book.common.manager;
 
 import com.tan.book.common.dao.IBaseDao;
 

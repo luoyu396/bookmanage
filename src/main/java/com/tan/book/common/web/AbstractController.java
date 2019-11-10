@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tan.book.common.model.AjaxResult;
 import com.tan.book.common.model.Constants;
-import com.tan.book.common.service.IBaseService;
+import com.tan.book.common.manager.IBaseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

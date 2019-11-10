@@ -1,10 +1,10 @@
-package com.tan.book.bookmanage.manager.impl;
+package com.tan.book.bookmanage.service.impl;
 
 import com.tan.book.bookmanage.business.IUserDao;
 import com.tan.book.common.dao.IBaseDao;
-import com.tan.book.bookmanage.manager.IUserService;
+import com.tan.book.bookmanage.service.IUserService;
 import com.tan.book.bookmanage.model.User;
-import com.tan.book.common.service.AbstractService;
+import com.tan.book.common.manager.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

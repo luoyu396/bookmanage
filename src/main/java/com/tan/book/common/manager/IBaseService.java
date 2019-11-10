@@ -1,4 +1,4 @@
-package com.tan.book.common.service;
+package com.tan.book.common.manager;
 
 import java.util.List;
 

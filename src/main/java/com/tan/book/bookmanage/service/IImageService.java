@@ -1,6 +1,6 @@
-package com.tan.book.bookmanage.manager;
+package com.tan.book.bookmanage.service;
 
-import com.tan.book.common.service.IBaseService;
+import com.tan.book.common.manager.IBaseService;
 
 /**
  * 图书附件服务接口

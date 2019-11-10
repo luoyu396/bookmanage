@@ -1,7 +1,7 @@
-package com.tan.book.bookmanage.manager;
+package com.tan.book.bookmanage.service;
 
 import com.tan.book.bookmanage.model.User;
-import com.tan.book.common.service.IBaseService;
+import com.tan.book.common.manager.IBaseService;
 
 /**
  * 用户服务接口

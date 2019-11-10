@@ -1,10 +1,10 @@
 package com.tan.book.bookmanage.controller;
 
-import com.tan.book.bookmanage.manager.IImageService;
+import com.tan.book.bookmanage.service.IImageService;
 import com.tan.book.common.model.AjaxResult;
 import com.tan.book.common.model.Constants;
 import com.tan.book.bookmanage.model.Image;
-import com.tan.book.common.service.IBaseService;
+import com.tan.book.common.manager.IBaseService;
 import com.tan.book.common.web.AbstractController;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

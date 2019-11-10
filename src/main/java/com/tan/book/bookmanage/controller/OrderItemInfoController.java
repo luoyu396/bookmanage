@@ -1,8 +1,8 @@
 package com.tan.book.bookmanage.controller;
 
-import com.tan.book.bookmanage.manager.IOrderItemInfoService;
+import com.tan.book.bookmanage.service.IOrderItemInfoService;
 import com.tan.book.bookmanage.model.OrderItemInfo;
-import com.tan.book.common.service.IBaseService;
+import com.tan.book.common.manager.IBaseService;
 import com.tan.book.common.web.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
