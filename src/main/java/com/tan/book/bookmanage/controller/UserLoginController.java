@@ -1,8 +1,8 @@
 package com.tan.book.bookmanage.controller;
 
 import com.tan.book.bookmanage.manager.IUserService;
-import com.tan.book.bookmanage.model.AjaxResult;
-import com.tan.book.bookmanage.model.Constants;
+import com.tan.book.common.model.AjaxResult;
+import com.tan.book.common.model.Constants;
 import com.tan.book.bookmanage.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

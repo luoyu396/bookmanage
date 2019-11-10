@@ -1,4 +1,4 @@
-package com.tan.book.bookmanage.model;
+package com.tan.book.common.model;
 
 /**
  * @author tanbb

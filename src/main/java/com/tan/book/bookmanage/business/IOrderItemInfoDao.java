@@ -1,6 +1,6 @@
 package com.tan.book.bookmanage.business;
 
-import com.tan.book.bookmanage.dao.IBaseDao;
+import com.tan.book.common.dao.IBaseDao;
 
 /**
  * 订单条目数据接口

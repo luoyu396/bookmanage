@@ -1,6 +1,6 @@
-package com.tan.book.bookmanage.web;
+package com.tan.book.common.web;
 
-import com.tan.book.bookmanage.model.AjaxResult;
+import com.tan.book.common.model.AjaxResult;
 
 /**
  * 基础控制器接口

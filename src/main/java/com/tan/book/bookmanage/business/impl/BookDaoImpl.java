@@ -1,7 +1,7 @@
 package com.tan.book.bookmanage.business.impl;
 
 import com.tan.book.bookmanage.business.IBookDao;
-import com.tan.book.bookmanage.dao.AbstractDao;
+import com.tan.book.common.dao.AbstractDao;
 import org.springframework.stereotype.Repository;
 
 /**

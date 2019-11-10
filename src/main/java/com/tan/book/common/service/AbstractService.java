@@ -1,6 +1,6 @@
-package com.tan.book.bookmanage.service;
+package com.tan.book.common.service;
 
-import com.tan.book.bookmanage.dao.IBaseDao;
+import com.tan.book.common.dao.IBaseDao;
 
 import java.util.List;
 

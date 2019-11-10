@@ -1,12 +1,14 @@
-package com.tan.book.bookmanage.service;
+package com.tan.book.common.dao;
 
 import java.util.List;
 
 /**
- * 基础服务接口
- * @author tanbb
+ * @Author tanbb
+ * @Description 数据库服务接口
+ * @Version 1.0
  **/
-public interface IBaseService {
+public interface IBaseDao {
+
     /**
      * @Author tanbb
      * @Description 保存对象
@@ -126,4 +128,5 @@ public interface IBaseService {
      * @return java.util.List<E>
      **/
     <T, E> List<E> selectList(String namespace, String id, T params);
+
 }

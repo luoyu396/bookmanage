@@ -1,12 +1,10 @@
-package com.tan.book.bookmanage.web;
+package com.tan.book.common.web;
 
-import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.tan.book.bookmanage.model.AjaxResult;
-import com.tan.book.bookmanage.model.Constants;
-import com.tan.book.bookmanage.service.IBaseService;
-import org.apache.commons.lang3.StringUtils;
+import com.tan.book.common.model.AjaxResult;
+import com.tan.book.common.model.Constants;
+import com.tan.book.common.service.IBaseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

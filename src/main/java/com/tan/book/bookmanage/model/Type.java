@@ -1,5 +1,6 @@
 package com.tan.book.bookmanage.model;
 
+import com.tan.book.common.model.TreeNode;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;

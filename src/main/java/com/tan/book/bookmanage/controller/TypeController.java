@@ -1,9 +1,12 @@
 package com.tan.book.bookmanage.controller;
 
+import com.tan.book.common.model.AjaxResult;
+import com.tan.book.common.model.Constants;
+import com.tan.book.common.model.TreeNode;
 import com.tan.book.bookmanage.manager.ITypeService;
 import com.tan.book.bookmanage.model.*;
-import com.tan.book.bookmanage.service.IBaseService;
-import com.tan.book.bookmanage.web.AbstractController;
+import com.tan.book.common.service.IBaseService;
+import com.tan.book.common.web.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
