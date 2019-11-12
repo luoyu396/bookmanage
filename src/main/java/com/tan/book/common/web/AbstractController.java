@@ -59,7 +59,7 @@ public abstract class AbstractController<T> implements IBaseController<T>{
 
     @Override
     @GetMapping("queryListPage")
-    public AjaxResult queryListPage(int page, int rows){
+    public AjaxResult queryListPage(@RequestParam(name = "page", defaultValue = "1") int page, @RequestParam(name = "rows", defaultValue = "10") int rows){
         AjaxResult result = new AjaxResult();
         try {
             PageHelper.startPage(page, rows);
@@ -77,7 +77,7 @@ public abstract class AbstractController<T> implements IBaseController<T>{
 
     @Override
     @PostMapping("queryListPage2")
-    public AjaxResult queryListPage2(int page, int rows, T params) {
+    public AjaxResult queryListPage2(@RequestParam(name = "page", defaultValue = "1") int page, @RequestParam(name = "rows", defaultValue = "10") int rows, T params) {
         AjaxResult result = new AjaxResult();
         try {
             PageHelper.startPage(page, rows);
