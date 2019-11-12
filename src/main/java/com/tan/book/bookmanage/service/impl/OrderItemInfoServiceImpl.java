@@ -37,7 +37,17 @@ public class OrderItemInfoServiceImpl extends AbstractService implements IOrderI
     }
 
     @Override
+    public int statSaleCount(Map<String, Object> map) {
+        return orderItemInfoDao.statSaleCount(map);
+    }
+
+    @Override
     public List<StatisticData> statSalePriceList(Map<String, Object> map) {
         return orderItemInfoDao.statSalePriceList(map);
+    }
+
+    @Override
+    public double statSalePrice(Map<String, Object> map) {
+        return orderItemInfoDao.statSalePrice(map);
     }
 }

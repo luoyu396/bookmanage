@@ -114,8 +114,13 @@
 		st.saleCount
 		from (select i.BOOK_ID, sum(i.BOOK_COUNT) as saleCount from bt_t_order_item i
 		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '2'
-		where i.CREATE_TIME &gt;= STR_TO_DATE(#{startTime}, '%Y-%m-%d %H:%i:%s')
-		and i.CREATE_TIME &lt;= STR_TO_DATE(#{endTime}, '%Y-%m-%d %H:%i:%s')
+		where 1=1
+		<if test="startTime != null and startTime !=''">
+			and i.CREATE_TIME &gt;= STR_TO_DATE(#{startTime}, '%Y-%m-%d %H:%i:%s')
+		</if>
+		<if test="endTime != null and endTime !=''">
+			and i.CREATE_TIME &lt;= STR_TO_DATE(#{endTime}, '%Y-%m-%d %H:%i:%s')
+		</if>
 		GROUP BY i.BOOK_ID) st
 		join bt_t_book b
 		on st.BOOK_ID = b.BOOK_ID
@@ -128,6 +133,27 @@
 			and (pt.PARENT_ID = #{typeId} or pt.ROOT_ID = #{typeId})))
 		</if>
 		ORDER BY st.saleCount desc
+	</select>
+
+	<!-- 统计图书总销量-->
+	<select id="statSaleCount" parameterType="map" resultType="int">
+		select sum(i.BOOK_COUNT) as saleCount from bt_t_order_item i
+		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '2'
+		join bt_t_book b on i.BOOK_ID = b.BOOK_ID
+		join bt_t_type t
+		on b.TYPE_ID = t.TYPE_ID
+		where 1=1
+		<if test="startTime != null and startTime !=''">
+			and i.CREATE_TIME &gt;= STR_TO_DATE(#{startTime}, '%Y-%m-%d %H:%i:%s')
+		</if>
+		<if test="endTime != null and endTime !=''">
+			and i.CREATE_TIME &lt;= STR_TO_DATE(#{endTime}, '%Y-%m-%d %H:%i:%s')
+		</if>
+		<if test="typeId != null and typeId !=''">
+			and (b.TYPE_ID = #{typeId}
+			or EXISTS(select 1 from bt_t_type pt where pt.TYPE_ID = b.TYPE_ID
+			and (pt.PARENT_ID = #{typeId} or pt.ROOT_ID = #{typeId})))
+		</if>
 	</select>
 
 	<!-- 统计图书销售额-->
@@ -150,8 +176,13 @@
 		st.totalSalePrice
 		from (select i.BOOK_ID, sum(i.SUB_TOTAL) as totalSalePrice from bt_t_order_item i
 		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '2'
-		where i.CREATE_TIME &gt;= STR_TO_DATE(#{startTime}, '%Y-%m-%d %H:%i:%s')
-		and i.CREATE_TIME &lt;= STR_TO_DATE(#{endTime}, '%Y-%m-%d %H:%i:%s')
+		where 1=1
+		<if test="startTime != null and startTime !=''">
+			and i.CREATE_TIME &gt;= STR_TO_DATE(#{startTime}, '%Y-%m-%d %H:%i:%s')
+		</if>
+		<if test="endTime != null and endTime !=''">
+			and i.CREATE_TIME &lt;= STR_TO_DATE(#{endTime}, '%Y-%m-%d %H:%i:%s')
+		</if>
 		GROUP BY i.BOOK_ID) st
 		join bt_t_book b
 		on st.BOOK_ID = b.BOOK_ID
@@ -164,5 +195,26 @@
 			and (pt.PARENT_ID = #{typeId} or pt.ROOT_ID = #{typeId})))
 		</if>
 		ORDER BY st.totalSalePrice desc
+	</select>
+
+	<!-- 统计图书总销售额-->
+	<select id="statSalePrice" parameterType="map" resultType="double">
+		select sum(i.SUB_TOTAL) as totalSalePrice from bt_t_order_item i
+		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '2'
+		join bt_t_book b on i.BOOK_ID = b.BOOK_ID
+		join bt_t_type t
+		on b.TYPE_ID = t.TYPE_ID
+		where 1=1
+		<if test="startTime != null and startTime !=''">
+			and i.CREATE_TIME &gt;= STR_TO_DATE(#{startTime}, '%Y-%m-%d %H:%i:%s')
+		</if>
+		<if test="endTime != null and endTime !=''">
+			and i.CREATE_TIME &lt;= STR_TO_DATE(#{endTime}, '%Y-%m-%d %H:%i:%s')
+		</if>
+		<if test="typeId != null and typeId !=''">
+			and (b.TYPE_ID = #{typeId}
+			or EXISTS(select 1 from bt_t_type pt where pt.TYPE_ID = b.TYPE_ID
+			and (pt.PARENT_ID = #{typeId} or pt.ROOT_ID = #{typeId})))
+		</if>
 	</select>
 </mapper>

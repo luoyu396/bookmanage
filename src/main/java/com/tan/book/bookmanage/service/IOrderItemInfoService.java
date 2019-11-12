@@ -21,9 +21,23 @@ public interface IOrderItemInfoService extends IBaseService {
     List<StatisticData> statSaleCountList(Map<String, Object> map);
 
     /**
+     * 统计图书总销量
+     * @param map
+     * @return
+     */
+    int statSaleCount(Map<String, Object> map);
+
+    /**
      * 统计图书销售额
      * @param map
      * @return
      */
     List<StatisticData> statSalePriceList(Map<String, Object> map);
+
+    /**
+     * 统计图书总销售额
+     * @param map
+     * @return
+     */
+    double statSalePrice(Map<String, Object> map);
 }

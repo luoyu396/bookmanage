@@ -2,7 +2,6 @@ package com.tan.book.bookmanage.business.impl;
 
 import com.tan.book.bookmanage.business.IOrderItemInfoDao;
 import com.tan.book.bookmanage.model.StatisticData;
-import com.tan.book.bookmanage.model.User;
 import com.tan.book.common.dao.AbstractDao;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +22,17 @@ public class OrderItemInfoDaoImpl extends AbstractDao implements IOrderItemInfoD
     }
 
     @Override
+    public int statSaleCount(Map<String, Object> map) {
+        return super.getSqlSessionTemplate().selectOne(this.getClass().getName()+".statSaleCount",map);
+    }
+
+    @Override
     public List<StatisticData> statSalePriceList(Map<String, Object> map) {
         return super.getSqlSessionTemplate().selectList(this.getClass().getName()+".statSalePriceList",map);
+    }
+
+    @Override
+    public double statSalePrice(Map<String, Object> map) {
+        return super.getSqlSessionTemplate().selectOne(this.getClass().getName()+".statSalePrice",map);
     }
 }

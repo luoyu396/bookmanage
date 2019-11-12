@@ -44,24 +44,28 @@ public class StatisticsController {
         int rows = 10;
         page = map.get("page") != null ? (Integer)map.get("page") : 1;
         rows = map.get("rows") != null ? (Integer)map.get("rows") : 10;
-        if(StringUtils.isBlank(statisticsType) || StringUtils.isBlank(startTime) || StringUtils.isBlank(endTime)) {
+        if(StringUtils.isBlank(statisticsType)) {
             result.put("code", Constants.ERROR);
             result.put("msg", "参数不能为空！" );
             return result;
         }
         try {
             List<StatisticData> list = null;
+            String totalValue = "总计: ";
             if("1".equals(statisticsType)) {
                 PageHelper.startPage(page, rows);
                 list = orderItemInfoService.statSaleCountList(map);
+                totalValue += orderItemInfoService.statSaleCount(map) + "(本)";
             }
             else {
                 PageHelper.startPage(page, rows);
                 list = orderItemInfoService.statSalePriceList(map);
+                totalValue += orderItemInfoService.statSalePrice(map) + "(元)";
             }
             PageInfo<StatisticData> pageInfo = new PageInfo<StatisticData>(list);
             result.put("code", Constants.SUCCESS);
             result.put("data", pageInfo);
+            result.put("totalValue", totalValue);
         }catch (Exception e) {
             result.put("code", Constants.SYS_ERROR);
             result.put("msg", "系统错误请联系管理人员");
