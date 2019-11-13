@@ -1,6 +1,7 @@
 package com.tan.book.bookmanage.service.impl;
 
 import com.tan.book.bookmanage.business.IBookDao;
+import com.tan.book.bookmanage.model.Book;
 import com.tan.book.common.dao.IBaseDao;
 import com.tan.book.bookmanage.service.IBookService;
 import com.tan.book.common.manager.AbstractService;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 图书信息服务接口实现
@@ -37,5 +39,10 @@ public class BookServiceImpl extends AbstractService implements IBookService {
     @Override
     public List<String> selectAuthors() {
         return bookDao.selectAuthors();
+    }
+
+    @Override
+    public List<Book> customBookList(Map<String, Object> map) {
+        return bookDao.customBookList(map);
     }
 }

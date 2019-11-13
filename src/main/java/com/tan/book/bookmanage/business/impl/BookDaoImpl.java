@@ -1,10 +1,12 @@
 package com.tan.book.bookmanage.business.impl;
 
 import com.tan.book.bookmanage.business.IBookDao;
+import com.tan.book.bookmanage.model.Book;
 import com.tan.book.common.dao.AbstractDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 图书信息数据接口实现
@@ -22,5 +24,10 @@ public class BookDaoImpl extends AbstractDao implements IBookDao {
     @Override
     public List<String> selectAuthors() {
         return super.getSqlSessionTemplate().selectList(this.getClass().getName()+".selectAuthors");
+    }
+
+    @Override
+    public List<Book> customBookList(Map<String, Object> map) {
+        return super.getSqlSessionTemplate().selectList(this.getClass().getName()+".customBookList", map);
     }
 }

@@ -142,4 +142,32 @@
 		select DISTINCT b.author
 		from bt_t_book b
 	</select>
+
+	<!-- 高级搜索查询图书信息集合 -->
+	<select id="customBookList" parameterType="map" resultType="Book">
+		<include refid="selectBookColunm"></include>
+		from BT_T_BOOK t, BT_T_TYPE g
+		where t.type_id = g.type_id
+		<if test="typeId != null and typeId !=''">
+			and (t.TYPE_ID = #{typeId}
+			or EXISTS(select 1 from bt_t_type pt where pt.TYPE_ID = t.TYPE_ID
+			and (pt.PARENT_ID = #{typeId} or pt.ROOT_ID = #{typeId})))
+		</if>
+		<if test="search != null and search !=''">
+			and (instr(t.book_name,#{bookName}) >0 or instr(t.isbn,#{isbn}) >0 or instr(t.publisher,#{publisher}) >0 or instr(t.author,#{author}) >0)
+		</if>
+		<if test="publisher != null and publisher !=''">
+			and instr(t.publisher,#{publisher}) >0
+		</if>
+		<if test="author != null and author !=''">
+			and instr(t.author,#{author}) >0
+		</if>
+		<if test="sprice != null and sprice !=''">
+			and t.sale_price &gt;= #{sprice} + 0
+		</if>
+		<if test="eprice != null and eprice !=''">
+			and t.sale_price &lt;= #{eprice} + 0
+		</if>
+		order by t.create_time desc
+	</select>
 </mapper>

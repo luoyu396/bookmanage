@@ -1,8 +1,10 @@
 package com.tan.book.bookmanage.service;
 
+import com.tan.book.bookmanage.model.Book;
 import com.tan.book.common.manager.IBaseService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 图书信息服务接口
@@ -22,4 +24,11 @@ public interface IBookService extends IBaseService {
      * @return
      */
     List<String> selectAuthors();
+
+    /**
+     * 高级搜索查询图书信息集合
+     * @param map
+     * @return
+     */
+    List<Book> customBookList(Map<String,Object> map);
 }
