@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 图书信息服务接口实现
@@ -28,4 +29,13 @@ public class BookServiceImpl extends AbstractService implements IBookService {
     private IBookDao bookDao;
 
 
+    @Override
+    public List<String> selectPublishers() {
+        return bookDao.selectPublishers();
+    }
+
+    @Override
+    public List<String> selectAuthors() {
+        return bookDao.selectAuthors();
+    }
 }

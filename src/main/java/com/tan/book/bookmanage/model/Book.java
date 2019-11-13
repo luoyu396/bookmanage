@@ -48,6 +48,9 @@ public class Book implements Serializable {
     //图片id
     private String imgId;
 
+    //下载路径
+    private String downloadUrl;
+
     //创建时间
     private Date createTime;
 
@@ -153,6 +156,14 @@ public class Book implements Serializable {
 
     public void setImgId(String imgId) {
         this.imgId = imgId;
+    }
+
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
     }
 
     public Date getCreateTime() {

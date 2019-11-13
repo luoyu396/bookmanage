@@ -130,4 +130,16 @@
 		order by t.create_time desc
     </select>
 
+
+	<!-- 查询所有出版社-->
+	<select id="selectPublishers" resultType="String">
+		select DISTINCT b.publisher
+		from bt_t_book b
+	</select>
+
+	<!-- 查询所有作者-->
+	<select id="selectAuthors" resultType="String">
+		select DISTINCT b.author
+		from bt_t_book b
+	</select>
 </mapper>

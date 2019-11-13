@@ -2,7 +2,9 @@ package com.tan.book.bookmanage.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tan.book.bookmanage.model.Image;
 import com.tan.book.bookmanage.model.StatisticData;
+import com.tan.book.bookmanage.service.IImageService;
 import com.tan.book.bookmanage.service.IOrderItemInfoService;
 import com.tan.book.common.model.AjaxResult;
 import com.tan.book.common.model.Constants;
@@ -28,6 +30,9 @@ public class StatisticsController {
 
     @Autowired
     private IOrderItemInfoService orderItemInfoService;
+
+    @Autowired
+    private IImageService imageService;
 
     @PostMapping("statisticses")
     public AjaxResult statisticsList(@RequestBody Map<String, Object> map) {
@@ -62,6 +67,15 @@ public class StatisticsController {
                 list = orderItemInfoService.statSalePriceList(map);
                 totalValue += orderItemInfoService.statSalePrice(map) + "(元)";
             }
+            //获取图片路径
+            list.stream().forEach(item->{
+                if(StringUtils.isNotBlank(item.getImgId())) {
+                    Image image = imageService.selectOne(item.getImgId());
+                    if(image != null){
+                        item.setDownloadUrl(image.getDownloadUrl());
+                    }
+                }
+            });
             PageInfo<StatisticData> pageInfo = new PageInfo<StatisticData>(list);
             result.put("code", Constants.SUCCESS);
             result.put("data", pageInfo);

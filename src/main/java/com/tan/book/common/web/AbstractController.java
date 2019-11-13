@@ -31,6 +31,7 @@ public abstract class AbstractController<T> implements IBaseController<T>{
         }
         try {
             Object object = baseService.selectOne(id);
+            postSelectOne(object);
             result.put("data", object);
             result.put("code", Constants.SUCCESS);
         }catch (Exception e) {
@@ -40,6 +41,8 @@ public abstract class AbstractController<T> implements IBaseController<T>{
         }
         return result;
     }
+    //查询后方法方法
+    protected void postSelectOne(Object object){}
 
     @Override
     @GetMapping("queryList")
@@ -47,6 +50,7 @@ public abstract class AbstractController<T> implements IBaseController<T>{
         AjaxResult result = new AjaxResult();
         try {
             List<T> list = baseService.selectList(params);
+            postQueryList(list);
             result.put("data", list);
             result.put("code", Constants.SUCCESS);
         }catch (Exception e) {
@@ -56,6 +60,8 @@ public abstract class AbstractController<T> implements IBaseController<T>{
         }
         return result;
     }
+    //查询后方法方法
+    protected void postQueryList(List<T> list){}
 
     @Override
     @GetMapping("queryListPage")
@@ -65,6 +71,7 @@ public abstract class AbstractController<T> implements IBaseController<T>{
             PageHelper.startPage(page, rows);
             List<T> list = baseService.selectList(null);
             PageInfo<T> pageInfo = new PageInfo<T>(list);
+            postQueryListPage(pageInfo);
             result.put("data", pageInfo);
             result.put("code", Constants.SUCCESS);
         }catch (Exception e) {
@@ -74,6 +81,8 @@ public abstract class AbstractController<T> implements IBaseController<T>{
         }
         return result;
     }
+    //查询后方法方法
+    protected void postQueryListPage(PageInfo<T> pageInfo){}
 
     @Override
     @PostMapping("queryListPage2")
@@ -83,6 +92,7 @@ public abstract class AbstractController<T> implements IBaseController<T>{
             PageHelper.startPage(page, rows);
             List<T> list = baseService.selectList(params);
             PageInfo<T> pageInfo = new PageInfo<T>(list);
+            postQueryListPage2(pageInfo);
             result.put("data", pageInfo);
             result.put("code", Constants.SUCCESS);
         }catch (Exception e) {
@@ -92,6 +102,9 @@ public abstract class AbstractController<T> implements IBaseController<T>{
         }
         return result;
     }
+    //查询后方法方法
+    protected void postQueryListPage2(PageInfo<T> pageInfo){}
+
     //保存前方法
     protected void initSave(T params){}
     /**
