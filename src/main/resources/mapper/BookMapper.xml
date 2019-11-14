@@ -154,19 +154,19 @@
 			and (pt.PARENT_ID = #{typeId} or pt.ROOT_ID = #{typeId})))
 		</if>
 		<if test="search != null and search !=''">
-			and (instr(t.book_name,#{bookName}) >0 or instr(t.isbn,#{isbn}) >0 or instr(t.publisher,#{publisher}) >0 or instr(t.author,#{author}) >0)
+			and (instr(t.book_name,#{search}) >0 or instr(t.isbn,#{search}) >0 or instr(t.publisher,#{search}) >0 or instr(t.author,#{search}) >0)
 		</if>
-		<if test="publisher != null and publisher !=''">
+		<if test="publisher != null and publisher !='不限'">
 			and instr(t.publisher,#{publisher}) >0
 		</if>
-		<if test="author != null and author !=''">
+		<if test="author != null and author !='不限'">
 			and instr(t.author,#{author}) >0
 		</if>
 		<if test="sprice != null and sprice !=''">
-			and t.sale_price &gt;= #{sprice} + 0
+			and t.sale_price*t.discount &gt;= #{sprice} + 0
 		</if>
 		<if test="eprice != null and eprice !=''">
-			and t.sale_price &lt;= #{eprice} + 0
+			and t.sale_price*t.discount &lt;= #{eprice} + 0
 		</if>
 		order by t.create_time desc
 	</select>
