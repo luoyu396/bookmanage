@@ -1,7 +1,9 @@
 package com.tan.book.bookmanage.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单表
@@ -12,7 +14,7 @@ public class OrderInfo implements Serializable {
     //订单ID
     private String orderId;
 
-    //订单状态
+    //订单状态1：已提交 2：配送中 3：已完成 4：已取消
     private String orderStatus;
 
     //合计金额
@@ -29,6 +31,9 @@ public class OrderInfo implements Serializable {
 
     //创建时间
     private Date createTime;
+
+    //订单详细
+    private List<OrderItemInfo> orderItemInfoList = new ArrayList<>();
 
     public String getOrderId() {
         return orderId;
@@ -84,5 +89,13 @@ public class OrderInfo implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public List<OrderItemInfo> getOrderItemInfoList() {
+        return orderItemInfoList;
+    }
+
+    public void setOrderItemInfoList(List<OrderItemInfo> orderItemInfoList) {
+        this.orderItemInfoList = orderItemInfoList;
     }
 }

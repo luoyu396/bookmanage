@@ -13,7 +13,8 @@
 			 t.book_price as bookPrice,
 			 t.book_count as bookCount,
 			 t.sub_total as subTotal,
-			 t.create_time as createTime
+			 t.create_time as createTime,
+			 b.img_id as imgId
 	</sql>
 
     <!-- 添加订单条目 -->
@@ -64,15 +65,22 @@
     <!-- 根据item_id查询订单条目-->
     <select id="selectOne" parameterType="String" resultType="OrderItemInfo">
         <include refid="selectOrderItemInfoColunm"></include>
-        from BT_T_ORDER_ITEM t
-        where t.item_id=#{_parameter}
+        from BT_T_ORDER_ITEM t , bt_t_book b
+        where t.book_id = b.book_id and t.item_id=#{_parameter}
     </select>
+
+	<!-- 根据order_id查询订单条目-->
+	<select id="orderItemInfoByOrderId" parameterType="String" resultType="OrderItemInfo">
+		<include refid="selectOrderItemInfoColunm"></include>
+		from BT_T_ORDER_ITEM t , bt_t_book b
+		where t.book_id = b.book_id and t.order_id=#{_parameter}
+	</select>
 
     <!-- 查询订单条目集合 -->
     <select id="selectList" parameterType="OrderItemInfo" resultType="OrderItemInfo">
         <include refid="selectOrderItemInfoColunm"></include>
-        from BT_T_ORDER_ITEM t
-        <where>
+        from BT_T_ORDER_ITEM t , bt_t_book b
+		where t.book_id = b.book_id
 			<if test="itemId != null and itemId !=''">
 				and t.item_id = #{itemId}
 			</if>
@@ -91,7 +99,6 @@
             <if test="subTotal != null and subTotal !=''">
                 and t.sub_total = #{subTotal}
             </if>
-        </where>
     </select>
 
 	<!-- 统计图书销量-->
@@ -113,7 +120,7 @@
 		t.type_name as typeName,
 		st.saleCount
 		from (select i.BOOK_ID, sum(i.BOOK_COUNT) as saleCount from bt_t_order_item i
-		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '2'
+		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '3'
 		where 1=1
 		<if test="startTime != null and startTime !=''">
 			and i.CREATE_TIME &gt;= STR_TO_DATE(#{startTime}, '%Y-%m-%d %H:%i:%s')
@@ -138,7 +145,7 @@
 	<!-- 统计图书总销量-->
 	<select id="statSaleCount" parameterType="map" resultType="int">
 		select sum(i.BOOK_COUNT) as saleCount from bt_t_order_item i
-		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '2'
+		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '3'
 		join bt_t_book b on i.BOOK_ID = b.BOOK_ID
 		join bt_t_type t
 		on b.TYPE_ID = t.TYPE_ID
@@ -175,7 +182,7 @@
 		t.type_name as typeName,
 		st.totalSalePrice
 		from (select i.BOOK_ID, sum(i.SUB_TOTAL) as totalSalePrice from bt_t_order_item i
-		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '2'
+		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '3'
 		where 1=1
 		<if test="startTime != null and startTime !=''">
 			and i.CREATE_TIME &gt;= STR_TO_DATE(#{startTime}, '%Y-%m-%d %H:%i:%s')
@@ -200,7 +207,7 @@
 	<!-- 统计图书总销售额-->
 	<select id="statSalePrice" parameterType="map" resultType="double">
 		select sum(i.SUB_TOTAL) as totalSalePrice from bt_t_order_item i
-		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '2'
+		join bt_t_order o on i.ORDER_ID = o.ORDER_ID and o.ORDER_STATUS = '3'
 		join bt_t_book b on i.BOOK_ID = b.BOOK_ID
 		join bt_t_type t
 		on b.TYPE_ID = t.TYPE_ID

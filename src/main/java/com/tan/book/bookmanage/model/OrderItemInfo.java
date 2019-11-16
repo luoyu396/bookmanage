@@ -33,6 +33,12 @@ public class OrderItemInfo implements Serializable {
     //创建时间
     private Date createTime;
 
+    //图片id
+    private String imgId;
+
+    //下载路径
+    private String downloadUrl;
+
     public String getItemId() {
         return itemId;
     }
@@ -95,5 +101,21 @@ public class OrderItemInfo implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getImgId() {
+        return imgId;
+    }
+
+    public void setImgId(String imgId) {
+        this.imgId = imgId;
+    }
+
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
     }
 }

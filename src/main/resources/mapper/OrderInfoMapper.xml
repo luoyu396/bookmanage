@@ -15,6 +15,20 @@
 			 u.user_name as userName
 	</sql>
 
+	<!-- 查询订单与订单明细 -->
+	<resultMap id="orderInfoResultMap" type="OrderInfo">
+		<id column="order_id" property="orderId"/>
+		<result column="order_status" property="orderStatus"/>
+		<result column="total_money" property="totalMoney"/>
+		<result column="address" property="address"/>
+		<result column="user_id" property="userId"/>
+		<result column="create_time" property="createTime"/>
+		<collection property="orderItemInfoList"
+			select="com.tan.book.bookmanage.business.impl.OrderItemInfoDaoImpl.orderItemInfoByOrderId"
+			column="order_id">
+		</collection>
+	</resultMap>
+
     <!-- 添加订单 -->
     <insert id="insert" parameterType="OrderInfo">
 		insert into BT_T_ORDER (order_id,
@@ -84,5 +98,33 @@
 			<if test="userName != null and userName !=''">
 				and instr(u.user_name,#{userName}) >0
 			</if>
+		order by t.create_time desc
     </select>
+
+	<!-- 查询订单与条目集合 -->
+	<select id="orderInfoAndItemList" parameterType="map" resultMap="orderInfoResultMap">
+		select t.*
+		from BT_T_ORDER t
+		<where>
+			<if test="orderId != null and orderId !=''">
+				and t.order_id = #{orderId}
+			</if>
+			<if test="orderStatus != null and orderStatus !=''">
+				and t.order_status = #{orderStatus}
+			</if>
+			<if test="totalMoney != null and totalMoney !=''">
+				and t.total_money = #{totalMoney}
+			</if>
+			<if test="address != null and address !=''">
+				and instr(t.address,#{address}) >0
+			</if>
+			<if test="userId != null and userId !=''">
+				and t.user_id = #{userId}
+			</if>
+			<if test="userName != null and userName !=''">
+				and instr(u.user_name,#{userName}) >0
+			</if>
+		</where>
+		order by t.create_time desc
+	</select>
 </mapper>
