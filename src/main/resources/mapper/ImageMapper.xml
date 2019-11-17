@@ -35,7 +35,7 @@
 				#{downloadUrl,jdbcType=VARCHAR},
 				#{fileSize,jdbcType=BIGINT},
 				#{fullSavePath,jdbcType=VARCHAR},
-				#{createTime,jdbcType=DATE})
+				#{createTime,jdbcType=TIMESTAMP})
 	</insert>
 
     <!-- 删除图书附件-->

@@ -35,7 +35,7 @@
 				#{bookId,jdbcType=VARCHAR},
 				#{bookCount,jdbcType=INTEGER},
 				#{userId,jdbcType=VARCHAR},
-				#{createTime,jdbcType=DATE})
+				#{createTime,jdbcType=TIMESTAMP})
 	</insert>
 
     <!-- 删除购物车-->

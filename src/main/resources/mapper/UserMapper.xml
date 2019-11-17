@@ -46,7 +46,7 @@
 				#{telphone,jdbcType=VARCHAR},
 				#{email,jdbcType=VARCHAR},
 				#{address,jdbcType=VARCHAR},
-				#{createTime,jdbcType=DATE},
+				#{createTime,jdbcType=TIMESTAMP},
 				#{remark,jdbcType=VARCHAR})
 	</insert>
 

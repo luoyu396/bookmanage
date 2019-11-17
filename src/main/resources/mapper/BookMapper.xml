@@ -57,7 +57,7 @@
 				#{introduction,jdbcType=VARCHAR},
 				#{discount,jdbcType=DOUBLE},
 				#{imgId,jdbcType=VARCHAR},
-				#{createTime,jdbcType=DATE})
+				#{createTime,jdbcType=TIMESTAMP})
 	</insert>
 
     <!-- 删除图书信息-->

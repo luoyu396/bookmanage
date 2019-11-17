@@ -50,7 +50,7 @@
 				#{totalMoney,jdbcType=DOUBLE},
 				#{address,jdbcType=VARCHAR},
 				#{userId,jdbcType=VARCHAR},
-				#{createTime,jdbcType=DATE})
+				#{createTime,jdbcType=TIMESTAMP})
 	</insert>
 
     <!-- 删除订单-->

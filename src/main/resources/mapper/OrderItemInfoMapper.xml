@@ -42,7 +42,7 @@
 				#{bookPrice,jdbcType=DOUBLE},
 				#{bookCount,jdbcType=INTEGER},
 				#{subTotal,jdbcType=DOUBLE},
-				#{createTime,jdbcType=DATE})
+				#{createTime,jdbcType=TIMESTAMP})
 	</insert>
 
     <!-- 删除订单条目-->
