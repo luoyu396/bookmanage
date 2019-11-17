@@ -49,7 +49,7 @@
 		set t.img_name=#{imgName,jdbcType=VARCHAR},
 			t.download_url=#{downloadUrl,jdbcType=VARCHAR},
 			t.file_size=#{fileSize,jdbcType=BIGINT},
-			t.full_save_path=#{fullSavePath,jdbcType=VARCHAR},
+			t.full_save_path=#{fullSavePath,jdbcType=VARCHAR}
 		where t.img_id=#{imgId}
 	</update>
 

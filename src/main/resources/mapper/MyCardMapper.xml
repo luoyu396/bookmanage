@@ -9,9 +9,11 @@
 		select t.card_id as cardId,
 			 t.book_id as bookId,
 			 t.book_count as bookCount,
-			 t.sort_num as sortNum,
 			 t.user_id as userId,
-			 t.create_time as createTime
+			 t.create_time as createTime,
+			 b.img_id as imgId,
+			 b.book_name as bookName,
+			 b.sale_price*b.discount as bookPrice
 	</sql>
 
     <!-- 添加购物车 -->
@@ -19,7 +21,6 @@
 		insert into BT_T_MY_CART (card_id,
 				book_id,
 				book_count,
-				sort_num,
 				user_id,
 				create_time)
 		values (
@@ -33,7 +34,6 @@
 				</choose>
 				#{bookId,jdbcType=VARCHAR},
 				#{bookCount,jdbcType=INTEGER},
-				#{sortNum,jdbcType=INTEGER},
 				#{userId,jdbcType=VARCHAR},
 				#{createTime,jdbcType=DATE})
 	</insert>
@@ -47,24 +47,24 @@
     <update id="update" parameterType="MyCard">
 		update BT_T_MY_CART t
 		set t.book_id=#{bookId,jdbcType=VARCHAR},
-			t.book_count=#{book_count,jdbcType=INTEGER},
-			t.sort_num=#{sortNum,jdbcType=INTEGER},
-			t.user_id=#{userId,jdbcType=VARCHAR},
+			t.book_count=#{bookCount,jdbcType=INTEGER},
+			t.user_id=#{userId,jdbcType=VARCHAR}
 		where t.card_id=#{cardId}
 	</update>
 
     <!-- 根据card_id查询购物车-->
     <select id="selectOne" parameterType="String" resultType="MyCard">
         <include refid="selectMyCardColunm"></include>
-        from BT_T_MY_CART t
-        where t.card_id=#{_parameter}
+        from BT_T_MY_CART t, bt_t_book b
+        where t.book_id = b.book_id and t.card_id=#{_parameter}
     </select>
 
     <!-- 查询购物车集合 -->
     <select id="selectList" parameterType="MyCard" resultType="MyCard">
         <include refid="selectMyCardColunm"></include>
-        from BT_T_MY_CART t
-        <where>
+        from BT_T_MY_CART t, bt_t_book b
+		where
+			t.book_id = b.book_id
             <if test="cardId != null and cardId !=''">
                 and t.card_id = #{cardId}
             </if>
@@ -74,7 +74,7 @@
             <if test="userId != null and userId !=''">
                 and t.user_id = #{userId}
             </if>
-        </where>
+		order by t.create_time
     </select>
 
 </mapper>

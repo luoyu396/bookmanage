@@ -41,6 +41,17 @@ public class BookController extends AbstractController<Book> {
     private IImageService imageService;
 
     @Override
+    protected void postSelectOne(Object object) {
+        Book book = (Book) object;
+        if(StringUtils.isNotBlank(book.getImgId())) {
+            Image image = imageService.selectOne(book.getImgId());
+            if(image != null){
+                book.setDownloadUrl(image.getDownloadUrl());
+            }
+        }
+    }
+
+    @Override
     protected void postQueryListPage2(PageInfo<Book> pageInfo) {
         List<Book> list = pageInfo.getList();
         list.stream().forEach(item -> {

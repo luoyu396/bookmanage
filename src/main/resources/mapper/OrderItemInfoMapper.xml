@@ -58,7 +58,7 @@
 			t.book_name=#{bookName,jdbcType=VARCHAR},
 			t.book_price=#{bookPrice,jdbcType=DOUBLE},
 			t.book_count=#{bookCount,jdbcType=INTEGER},
-			t.sub_total=#{subTotal,jdbcType=DOUBLE},
+			t.sub_total=#{subTotal,jdbcType=DOUBLE}
 		where t.item_id=#{itemId}
 	</update>
 

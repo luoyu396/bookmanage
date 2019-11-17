@@ -18,14 +18,23 @@ public class MyCard implements Serializable {
     //图书数量
     private Integer bookCount;
 
-    //排序
-    private Integer sortNum;
-
     //用户id
     private String userId;
 
     //创建时间
     private Date createTime;
+
+    //图书名称
+    private String bookName;
+
+    //图书价格
+    private Double bookPrice;
+
+    //图片id
+    private String imgId;
+
+    //下载路径
+    private String downloadUrl;
 
     public String getCardId() {
         return cardId;
@@ -51,14 +60,6 @@ public class MyCard implements Serializable {
         this.bookCount = bookCount;
     }
 
-    public Integer getSortNum() {
-        return sortNum;
-    }
-
-    public void setSortNum(Integer sortNum) {
-        this.sortNum = sortNum;
-    }
-
     public String getUserId() {
         return userId;
     }
@@ -73,5 +74,37 @@ public class MyCard implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getImgId() {
+        return imgId;
+    }
+
+    public void setImgId(String imgId) {
+        this.imgId = imgId;
+    }
+
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public Double getBookPrice() {
+        return bookPrice;
+    }
+
+    public void setBookPrice(Double bookPrice) {
+        this.bookPrice = bookPrice;
     }
 }

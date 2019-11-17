@@ -1,6 +1,8 @@
 package com.tan.book.bookmanage.service;
 
+import com.tan.book.bookmanage.model.MyCard;
 import com.tan.book.common.manager.IBaseService;
+import java.util.List;
 
 /**
  * 购物车服务接口
@@ -9,4 +11,10 @@ import com.tan.book.common.manager.IBaseService;
  */
 public interface IMyCardService extends IBaseService {
 
+    /**
+     * 提交我的购物车
+     * @param myCardList
+     * @return
+     */
+    boolean submitMyCard(List<MyCard> myCardList);
 }
